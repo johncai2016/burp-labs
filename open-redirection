@@ -1,0 +1,11 @@
+lab: DOM-based open redirection
+1. 考虑用DOM Invader来自动帮我们找
+2. 如果DOM Invader无法找到，那我们就要考虑页面中的link，比如返回或者导向其它页面的链接。
+3. 考虑地址栏url有没有类似url的参数
+
+通过观察我们发现了下面的html代码,在查看某个具体post页面的时候（F12即可看到)
+<a href="#" onclick="returnUrl = /url=(https?:\/\/.+)/.exec(location); if(returnUrl)location.href = returnUrl[1];else location.href = &quot;/&quot;">Back to Blog</a>
+注意到下面这个js就是一个正则表达式，location表示整个url，所以也就是在整个url中去查看是否有url=http/https://,如果有就取出它的值。
+/url=(https?:\/\/.+)/.exec(location)
+所以答案就自然而然知道了。
+
