@@ -14,4 +14,7 @@ Cookie: session=5QeirfhZHIcaZWxvqJMpqsDxihlT4lrS
  而且我们发现设置的值会返回到页面中的Last viewed product链接，通过F2可以发现context是在属性里面，所以考虑用"闭合，然后看看能不能注入属性或者顺带逃逸>.
  <a href="https://0aaf00e303ff6ed3c3ef5158004800b7.web-security-academy.net/product?productId=1">Last viewed product</a>
 但是通过测试可以发现，"会被转义，所以无法逃逸双引号的上下文。所以我们要考虑document.cookie来实现xss。
+
+web message:
+https://portswigger.net/web-security/dom-based/controlling-the-web-message-source
  
