@@ -1,1 +1,16 @@
 总结了一些常用的referer header的思路
+1. 下面几种情况是不会产生referer的
+   a. 直接给一个链接，也就是用户在浏览器上直接输入URL,这个时候是没有referer的，这个情况通常是用在GET请求上，所以我们自然而然会想到把POST方法改成GET试试。
+   b. 如果无法变成GET,这个时候也可以考虑用<meta>的方法，这样也是不会有referer的。For example.
+      <html>
+      <meta name="referrer" content="never">
+      <body>
+      </body>
+     </html>
+   c. 添加 Referrer-Policy: no-referrer
+    注意：当添加上面这个header之后，就不会有referer，并且Origin: null, 更多细节可以参考下面的链接
+    https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
+    
+ 2. 校验referer但是可以被bypass
+    a. 
+
