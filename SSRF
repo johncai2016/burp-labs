@@ -1,1 +1,8 @@
-
+lab: lab-ssrf-filter-bypass-via-open-redirection
+     POST /product/stock HTTP/1.1
+     stockApi=7muea4x0ym3epdlhrmd1suo10s6juaiz.oastify.com
+通过给stockApi设置一个burp collaborator发现返回"Invalid external stock check url 'Invalid URL'"，大概估计存在ssrf，因为它会去尝试解析这个url。替换成http://192.168.0.12:8080/admin 
+也是报一样的错误。根据题目提示，需要寻找一个open-redirection来bypass. 通过抓包分析，找到可疑点
+/product/nextProduct?currentProductId=1&path=/product?productId=2
+这里的可疑点就是path参数(path这个地方常见的漏洞点是path traversal和open redirection). 这两种思路都是可疑考虑的。
+那我们来试试open redirect,比如改成https://www.baidu.com,发现的确存在open redirect.剩下的就是把两者组合起来利用了。这里要注意的是要对数据做encode.
