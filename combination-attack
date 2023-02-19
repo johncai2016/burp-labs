@@ -1,0 +1,4 @@
+常见的用于组合攻击的思路：
+1.Open redirect
+这种常用来bypass一些限制，比如校验必须是域内的url，比如这个lab
+https://portswigger.net/web-security/ssrf/lab-ssrf-filter-bypass-via-open-redirection
