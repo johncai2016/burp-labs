@@ -1,1 +1,14 @@
-
+lab: DOM-based cookie manipulation
+1. 首先通过DOM Invader来辅助看看能不能自动帮我们定位到，发现在这个case走不通
+2. 我们通过抓包看看，发现有不少的包里面会包含cookie叫lastViewedProduct。那我们就很奇怪这个cookie是怎么来的，也就是到底在哪个request设置的，用什么方式设置的呢?
+通过追踪history 请求，发现是下面这个请求
+GET /product?productId=1 HTTP/1.1
+Host: 0a7000d503547d06c5ceb42c00a400e1.web-security-academy.net
+Cookie: session=5QeirfhZHIcaZWxvqJMpqsDxihlT4lrS
+查看response可以发现
+                       <script>
+                            document.cookie = 'lastViewedProduct=' + window.location + '; SameSite=None; Secure'
+                        </script>
+ 到此我们可以知道lastViewedProduct是在什么时候设置的，通过什么方式设置的。
+ 
+ 
