@@ -32,4 +32,9 @@ Detected message data inside potentially vulnerable element.innerHTML sink
  注意：这里有个困惑的地方就是我构造的payload用的是是<script> tag居然是通不过，最后看了solution是借助<img> tag。但其实我在exploit server上view exploit是可以弹出打印窗口的
  所以我的理解是这两种payload应该是可以的，只是没有贴近标准答案。
 
+lab: DOM XSS using web messages and JSON.parse
+还是选择用DOM Invader来辅助看看能不能定位到问题，发现在message tag会报以下问题
+Detected message data inside potentially vulnerable iframe.src sink
+看起来跟url有关，所以可以先考虑 javascript:window.print() 这个payload. 根据提示在DOM Invader尝试发送数据，发现可以弹出print.
+
  
