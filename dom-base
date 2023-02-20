@@ -17,4 +17,19 @@ Cookie: session=5QeirfhZHIcaZWxvqJMpqsDxihlT4lrS
 
 web message:
 https://portswigger.net/web-security/dom-based/controlling-the-web-message-source
+
+
+Lab: DOM XSS using web messages
+还是选择用DOM Invader来辅助看看能不能定位到问题，发现在message tag会报以下问题
+Detected message data inside potentially vulnerable element.innerHTML sink
+通过DOM Invader的对于改问题的描述我们可以定位到有问题的地方
+<script>
+                        window.addEventListener('message', function(e) {
+                            document.getElementById('ads').innerHTML = e.data;
+                        })
+                    </script>
+ 通过DOM Invader的Build POC即可完成。
+ 注意：这里有个困惑的地方就是我构造的payload用的是是<script> tag居然是通不过，最后看了solution是借助<img> tag。但其实我在exploit server上view exploit是可以弹出打印窗口的
+ 所以我的理解是这两种payload应该是可以的，只是没有贴近标准答案。
+
  
