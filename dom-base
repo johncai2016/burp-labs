@@ -37,4 +37,9 @@ lab: DOM XSS using web messages and JSON.parse
 Detected message data inside potentially vulnerable iframe.src sink
 看起来跟url有关，所以可以先考虑 javascript:window.print() 这个payload. 根据提示在DOM Invader尝试发送数据，发现可以弹出print.
 
- 
+ lab: Reflected DOM XSS
+ DOM Invader还是挺好用的，根据提示可以知道是searchResult.js中的这个地方有问题。
+   eval('var searchResultsObj = ' + this.responseText);
+ 按F2在Source tag这个地方找到searchResult.js下个断点可以发现
+ 通过输入'abc'然后debug到那个位置可以发现是 ""上下文，试着输入：abc"看看能否逃逸上下文，发现会被转义。
+ 这时候考虑加入转义字符：abc\",发现可以逃逸上下文。但是无法弹框。注意看是因为语法问题，可以考虑用comment来消除语法问题。
