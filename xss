@@ -1,0 +1,7 @@
+lab: Reflected XSS into HTML context with all tags blocked except custom ones
+通过简单的测试可以发现如果给<script>alert(1)</script>会报
+"Tag is not allowed"
+到这个链接找一些tag（其实题目已经说了是custom),假如不知道的话就需要用burp intruder是遍历看看哪个tab,哪个attribute可以用。
+https://portswigger.net/web-security/cross-site-scripting/cheat-sheet
+这里要注意是给exploit server设置payload通常可以用下面这种payload来模拟GET请求.
+<script>document.location=''</script>
