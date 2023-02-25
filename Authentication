@@ -18,3 +18,8 @@ https://hashtoolkit.com/decrypt-hash/?hash=51dc30ddc473d43a6011e9ebba6ca770
 Lab: Password brute-force via password change
 通过实验发现在修改密码的地方，如果输入正确的密码是返回200，但是如果输入错误的原始密码就会重定向到login页面。这里可以考虑用macro来解决这个问题，思路就是每次用账号A产生的cookie来给账号B尝试
 。官方的solution就比较简单一些，利用的是两个新密码不一致，但是程序会先判断旧密码是否正确的特点来判断。
+
+lab: Username enumeration via account lock
+通过试验可以发现当我们给随意用户名的时候和随意密码，然后尝试7-8次都没有被锁，所以也就不用考虑IP block问题。题目要求是枚举用户名，说明如果用户名是正确的时候，它的消息应该是不一样的。所以自然
+考虑用burp intruder来爆破用户名。
+通过第一步爆破了用户名之后，我们就可以进一步爆破密码了，这个点是实际中也比较容易遇到的，就是虽然页面提示账号已经被锁了，但是只要你给正确的用户名和密码，它还是可以登录进去的。
