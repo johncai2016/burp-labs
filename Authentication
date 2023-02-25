@@ -14,3 +14,7 @@ https://hashtoolkit.com/decrypt-hash/?hash=51dc30ddc473d43a6011e9ebba6ca770
 我们来看看如何暴力破解得到cookie，因为我们知道stay-in cookie的特点如下：
   base64(用户名+hash(密码))
 因为常用密码表是知道的，所以可以通过burp intruder的payload process加上这些规则来实现。因为正常的cookie是可以直接访问到my-account的信息的。
+
+Lab: Password brute-force via password change
+通过实验发现在修改密码的地方，如果输入正确的密码是返回200，但是如果输入错误的原始密码就会重定向到login页面。这里可以考虑用macro来解决这个问题，思路就是每次用账号A产生的cookie来给账号B尝试
+。官方的solution就比较简单一些，利用的是两个新密码不一致，但是程序会先判断旧密码是否正确的特点来判断。
