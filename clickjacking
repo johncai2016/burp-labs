@@ -10,3 +10,11 @@ Lab: Clickjacking with a frame buster script
 这题令人困惑的地方就是为啥用burp clickbandit生成的iframe会提示‘This page cannot be framed’呢?我是不知道要怎么解决的，后来去看了solution发现它用的sandbox属性的值跟burp clickbandit生成的
 不太一样，我们可以发现在sandbox这个属性里面有两个值: allow-scripts allow-forms，但是solution里面却只有一个allow-forms.尝试把allow-scripts去掉发现页面就可以被frame了。所以还是要搞清楚
 这两个值的意义，但这里也提供了一个思路就是类似这种问题以后就可以尝试去掉其中的部分值看看。
+allow-scripts allows JavaScript execution, and also allows features to trigger automatically. 而里面有下面这段代码
+<script>
+                    if(top != self) {
+                                window.addEventListener("DOMContentLoaded", function() {
+                                    document.body.innerHTML = 'This page cannot be framed';
+                                }, false);
+                            }
+</script>
