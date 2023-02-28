@@ -1,0 +1,7 @@
+Lab: Clickjacking with form input data prefilled from a URL parameter
+其实题目已经告诉我们方法了，那就是通过URL参数去填充form.
+
+Lab: Exploiting clickjacking vulnerability to trigger DOM-based XSS
+因为题目说的是DOM-based XSS,根据DOM-based的特点，它一般是值从url中读取的，通过实验我们可以发现有几个地方会把url的值反映到页面中，一个是提交post之后的返回link，但是发现无法逃逸 "
+所以只能寻找别的地方，比较大可疑的就是submit feedback了。通常来说，为了达到dom的效果，通常就是把form的参数放到url中看看会如何。发现url中的参数的确会影响到form的值(思路来自上一个lab)，那首先想到的就是这些form
+的值是否存在DOM XSS了。折腾一番发现逃逸不了。但是我们发现提交form以后，name的值是在submit的结果中显示出来的。所以考虑在submit结果这个地方做文章.
