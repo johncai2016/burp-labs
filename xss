@@ -24,3 +24,6 @@ https://www.w3schools.com/tags/tag_link.asp
 lab: Reflected XSS with some SVG markup allowed
 当输入<svg onload=alert()>时发现提示event not allow. 所以首先想到的是把burp xss cheetsheet中的全部event copy出来，然后放到burp intruder中去试。
 发现走不通，所以考虑去all payload thing github上看看有没有其它没有考虑到的payload.最终找到payload可以解决问题。
+
+lab:Reflected XSS into a JavaScript string with single quote and backslash escaped
+通过实验发现单引号，反斜杠都被转义了，包括\\'这样也不行，但是我们可以发现它的上下文是在<script>里面，依是考虑嵌入<script>或者闭合</script>。
