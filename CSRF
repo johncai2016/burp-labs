@@ -1,1 +1,11 @@
+lab: SameSite Lax bypass via method override
+要解决这个lab有两个知识点要知道：
+1. https://portswigger.net/web-security/csrf/bypassing-samesite-restrictions
+Lax SameSite restrictions mean that browsers will send the cookie in cross-site requests, but only if both of the following conditions are met:
+The request uses the GET method.
+The request resulted from a top-level navigation by the user, such as clicking on a link.
+2. GET/POST可以用下面的方法来override
+<form action="https://vulnerable-website.com/account/transfer-payment" method="POST"> <input type="hidden" name="_method" value="GET"> <input type="hidden" name="recipient" value="hacker"> <input type="hidden" name="amount" value="1000000"> </form>
+or 
+GET /my-account/change-email?email=foo%40web-security-academy.net&_method=POST
 
