@@ -15,3 +15,8 @@ Lab: SameSite Strict bypass via client-side redirect
 web-security-academy.net/www.baidu.com
 而我们的目标是需要变成
 /my-account/change-email?email=d%40139.com&submit=1&_method=POST
+
+lab: CSRF with broken Referer validation
+通过实验可以发现，检查的referer里面只要有包含特定的字符串就可以通过，所以想到在path上添加这个特定字符串的方法。但是在view exploit却发现还是不成功，抓包查看，发现原来referer并不是按预期的携带path
+,google后发现原来是referer policy导致的。所以思路就从这个referer policy去寻找了。
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
