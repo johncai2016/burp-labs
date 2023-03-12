@@ -9,3 +9,9 @@ The request resulted from a top-level navigation by the user, such as clicking o
 or 
 GET /my-account/change-email?email=foo%40web-security-academy.net&_method=POST
 
+Lab: SameSite Strict bypass via client-side redirect
+这题关于csrf的部分跟上一个lab差不多，但是发现不会工作，因为same site设置为了strict. 根据题目是有redirect, 通过实验知道post comment后的确有redirect. 
+尝试常规的open redirct,但是发现postId=www.baidu.com会变成/post/www.baidu.com。依是尝试用../回退看看，发现在浏览器中会变成
+web-security-academy.net/www.baidu.com
+而我们的目标是需要变成
+/my-account/change-email?email=d%40139.com&submit=1&_method=POST
