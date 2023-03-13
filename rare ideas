@@ -1,1 +1,13 @@
+这里记录的labs都是不太好想到的点
+Lab: Authentication bypass via flawed state machine
+通过抓包观察可以发现:
+1. login后获取一个cookie
+2. GET role-selector的时候会用第一个cookie去得到第二个cookie
+3. POST role-selector的时候会用第二个cookie去得到第三个cookie
 
+比较容易想到的idea是
+1. 在第三个POST role-selector的时候改成admin/administrator，发现走不通
+2. 直接把抓到的每一步的cookie直接请求/admin，发现走不通
+3. 在login的时候把用户名改成adminitrator，然后用随意的密码，这时候会产生一个cookie，用这个cookie去继续第二步，第三步，发现第三步会校验cookie是不是真正登录成功的.所以这个思路也失败了。
+
+后来看了solution发现是要把GET role-selector直接drop掉，因为在抓包的时候，第一步到第二步是自动完成的，所以其实比较难想到这样的思路来解决问题.
