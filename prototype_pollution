@@ -1,3 +1,17 @@
+Client-side prototype pollution
+lab: DOM XSS via client-side prototype pollution
+通过URL来进行client-side prototype pollution的常见方法, 尽量通过DOM INVADER来查找
+方法一:
+__proto__.testproperty=DOM_INVADER_PP_POC
+
+方法二:
+constructor.prototype.testproperty=DOM_INVADER_PP_POC
+
+思考：
+如何去寻找gadgets呢
+
+Server-side prototype pollution
+
 Lab: Bypassing flawed input filters for server-side prototype pollution
 可以通过下面两种方式来添加属性到prototype
 方法一：
