@@ -27,3 +27,6 @@ lab: Reflected XSS with some SVG markup allowed
 
 lab:Reflected XSS into a JavaScript string with single quote and backslash escaped
 通过实验发现单引号，反斜杠都被转义了，包括\\'这样也不行，但是我们可以发现它的上下文是在<script>里面，依是考虑嵌入<script>或者闭合</script>。
+
+
+data:,alert(1);
