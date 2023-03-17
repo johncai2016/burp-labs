@@ -26,6 +26,13 @@ function sanitizeKey(key) {
     return key;
 }
 
+2. 利用一些比较特殊的浏览器API:
+https://portswigger.net/research/widespread-prototype-pollution-gadgets
+lab: Client-side prototype pollution via browser APIs
+首先根据DOM Invader可以找到source点，结合引用的Js知道Object.defineProperty，这时候结合上文提到的方法，利用
+Object.prototype.value='overwritten';
+even though the property has been made unconfigurable and unwritable, by using a prototype pollution source we can poison the descriptor used by Object.defineProperty to overwrite the property value. 
+This is because if you don't specify a "value" property on the descriptor then the JavaScript engine uses the Object.prototype.
 
 Server-side prototype pollution
 Lab: Bypassing flawed input filters for server-side prototype pollution
