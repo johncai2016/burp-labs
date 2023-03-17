@@ -85,3 +85,4 @@ https://mp.weixin.qq.com/s?__biz=MzI0NzEwOTM0MA==&mid=2652474207&idx=1&sn=18f73d
 
 当然这里还是要去了解一下node.js怎么fork()一个新进程，这样可以更好的理解这里的注入方法.
 https://nodejs.org/dist/latest-v10.x/docs/api/child_process.html#child_process_child_process_fork_modulepath_args_options
+https://portswigger.net/web-security/prototype-pollution/server-side
