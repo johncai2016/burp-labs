@@ -1,3 +1,10 @@
+重定向的思路一般有两个：
+1. 跨域重定向，也就是重定位到另外一个网站
+2. 同一个站内的重定向，这个时候可能需要借助path traversal来实现重定向到站内的其它路径。
+
+lab中常见的open redirect 位置:
+通过观察可以知道，burp lab中一般的重定向出现在提交comment的时候。
+
 lab: DOM-based open redirection
 1. 考虑用DOM Invader来自动帮我们找
 2. 如果DOM Invader无法找到，那我们就要考虑页面中的link，比如返回或者导向其它页面的链接。
@@ -9,3 +16,7 @@ lab: DOM-based open redirection
 /url=(https?:\/\/.+)/.exec(location)
 所以答案就自然而然知道了。
 
+lab: SameSite Strict bypass via client-side redirect
+首先我们知道由于设置了samesite 属性为strict, 也就是我们只能做站内csrf. 
+在修改email的地方，我们发现除了samesite这个防御措施外并没有别的，而且我们也试出来可以用get代替post.由此我们可以大概引出思路，如果我们可以找到站内一个其它问题，比如xss或者open redirect,那
+就可以达到目的了。从题目中看出是需要用到open redirect,结合burp lab常见的open redirect是在提交comment的地方。
