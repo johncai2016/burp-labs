@@ -2,5 +2,10 @@ PHP:
   a. 反系列化的时候是不会调用construct函数的.
   b. unlink接收的是一个具体文件，可以把这个具体文件删除
   c.构建反系列化数据时一定要注意字符的长度
+  d. response虽然会返回错误，但是实际上已经解决问题了
+  e.在使用phpggc的时候，有可能遇到这样的问题
+  
+ You can sometimes read source code by appending a tilde (~) to a filename to retrieve an editor-generated backup file.
+
 Java:
 Ruby:
