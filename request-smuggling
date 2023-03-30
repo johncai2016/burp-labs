@@ -1,0 +1,9 @@
+For chunk header,这里通常用timeout来判断是否支持chunk这个header,比如这里是3(注意这里是16进制)，那表示在3和0\r\n\r\n之间的x=y长度就是3. 这一点可以通过选中3和0之间的部分，然后通过Inspector就可以看出来了。
+3
+x=y
+0
+所以我们来思考一个问题，那就是为啥detect里面通常要给一个不同的长度来判断，比如这个是会引起timeout的，因为如果服务器支持chunk，它就会把下面的内容当作chunk来处理，也就是它预期d到0之间应该是又
+13个字符，如果服务器timeout了，说明支持chunk。否则就是不支持。所以我们可以看到http request smuggling就是利用这样的特性来检测的。
+d
+x=y
+0
