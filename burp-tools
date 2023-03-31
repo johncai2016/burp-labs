@@ -1,5 +1,0 @@
-关于DOM Invader有两个需要注意的地方
-1. When ‘Inject canary into all source is on’, the ‘Scan for Gadgets’ will not work at all.
-2. If ‘Auto fire events are on’, it will start the scanning but no sink can be found. 
-
-关于用Inspector来发送HTTP2没有返回response的问题

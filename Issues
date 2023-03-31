@@ -1,0 +1,10 @@
+问题1: DOM Invader无法自动找到gadgets， 比如这个lab
+https://portswigger.net/web-security/prototype-pollution/client-side/lab-prototype-pollution-dom-xss-via-an-alternative-prototype-pollution-vector
+解决方案: 在DOM Invader->setting->MISC里面查看下面的设置
+1. When ‘Inject canary into all source is on’, the ‘Scan for Gadgets’ will not work at all.
+2. If ‘Auto fire events are on’, it will start the scanning but no sink can be found. 
+
+问题2: Inspector发送HTTP2没有返回response的问题
+当你用http request smuggling entension自动找到问题后，把request send到repeater打算重发请求的时候，发现没有response回来(已经选择allow http/2 ALPN override)
+https://portswigger.net/web-security/request-smuggling/advanced/lab-request-smuggling-h2-cl-request-smuggling
+解决方案:待解决
