@@ -3,3 +3,6 @@
 https://portswigger.net/web-security/xxe/blind/lab-xxe-with-out-of-band-exfiltration
 基本思路就是把具体工作内容放在externel DTD,比如retrieve /etc/hostname
 然后xml中去引用这个DTD。
+
+https://portswigger.net/web-security/xxe/blind/lab-xxe-with-data-retrieval-via-error-messages
+上面两个例子都是通过external DTD来获取数据的，差别是一个是通过正常解析外带数据，另外一个是通过error message.关于error message这个还需要了解它的原理是啥才行。
