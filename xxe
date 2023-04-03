@@ -1,0 +1,5 @@
+大部分是可以通过burp pro->active scan 扫出来的，如果要加快速度，可以在Dashboard->scan configuration设置只扫描xxe.
+除了用扫描器外，如果涉及到要用external DTD的话，可以参考下面的例子(查看solution)
+https://portswigger.net/web-security/xxe/blind/lab-xxe-with-out-of-band-exfiltration
+基本思路就是把具体工作内容放在externel DTD,比如retrieve /etc/hostname
+然后xml中去引用这个DTD。
