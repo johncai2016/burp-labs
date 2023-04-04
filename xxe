@@ -6,3 +6,6 @@ https://portswigger.net/web-security/xxe/blind/lab-xxe-with-out-of-band-exfiltra
 
 https://portswigger.net/web-security/xxe/blind/lab-xxe-with-data-retrieval-via-error-messages
 上面两个例子都是通过external DTD来获取数据的，差别是一个是通过正常解析外带数据，另外一个是通过error message.关于error message这个还需要了解它的原理是啥才行。
+
+By default, XInclude will try to parse the included document as XML. Since /etc/passwd isn't valid XML, you will need to add an extra attribute to the XInclude directive to change this behavior.
+所以要把XML类型改为parse="text"
