@@ -1,4 +1,9 @@
 http://127.0.0.1/ 可以考虑用http://127.1/来bypass
 混合大小写
 url编码
+例子:https://portswigger.net/web-security/ssrf/lab-ssrf-with-blacklist-filter
+
+通过open-redirect来bypass
+https://portswigger.net/web-security/ssrf/lab-ssrf-filter-bypass-via-open-redirection
+
 
