@@ -1,1 +1,3 @@
 Path traversal常见的位置: product image 
+
+/cgi-bin/phpinfo.php
