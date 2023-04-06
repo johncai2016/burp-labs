@@ -8,6 +8,8 @@ java ysoserial-all.jar
 /root/Downloads/github
 php:phpggc
 
+Ruby:
+https://github.com/httpvoid/writeups/blob/main/Ruby-deserialization-gadget-on-rails.md
 
 
 
