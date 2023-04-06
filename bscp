@@ -1,3 +1,14 @@
 Path traversal常见的位置: product image 
 
 /cgi-bin/phpinfo.php
+
+反系列化:
+java ysoserial-all.jar
+
+/root/Downloads/github
+php:phpggc
+
+
+
+
+
