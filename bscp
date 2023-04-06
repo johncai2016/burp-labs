@@ -1,6 +1,5 @@
 Path traversal常见的位置: product image 
 
-/cgi-bin/phpinfo.php
 
 反系列化:
 java ysoserial-all.jar
@@ -10,6 +9,17 @@ php:phpggc
 
 Ruby:
 https://github.com/httpvoid/writeups/blob/main/Ruby-deserialization-gadget-on-rails.md
+
+信息收集:
+1.通过给一些不同类型来看看response返回什么error message
+2.通过html review source code
+3. /cgi-bin/phpinfo.php
+4. .php~ 来获取源代码
+5. /robots.txt
+6. 通过trace
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/TRACE
+7. /.git
+https://www.bugcrowd.com/resources/levelup/github-recon-and-sensitive-data-exposure-module/
 
 
 
