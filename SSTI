@@ -1,1 +1,10 @@
+常见的可疑点：
+1. reflected request params to response
+2. user.name 这种类似object reference的地方
+
+
+常见的问题：语法问题，也就是要怎么去闭合的问题，类似sql injection.
+Study the Tornado documentation to discover that template expressions are surrounded with double curly braces, such as {{someExpression}}.
+In Burp Repeater, notice that you can escape out of the expression and inject arbitrary template syntax as follows:
+blog-post-author-display=user.name}}{{7*7}}
 
