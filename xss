@@ -30,3 +30,8 @@ lab:Reflected XSS into a JavaScript string with single quote and backslash escap
 
 
 data:,alert(1);
+
+XSS + CSRF
+
+XSS + CORS
+https://portswigger.net/web-security/cors/lab-breaking-https-attack
