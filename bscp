@@ -22,5 +22,7 @@ https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/TRACE
 https://www.bugcrowd.com/resources/levelup/github-recon-and-sensitive-data-exposure-module/
 
 
+常见的open redirect位置
+/product/nextProduct?path=
 
 
