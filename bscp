@@ -25,4 +25,8 @@ https://www.bugcrowd.com/resources/levelup/github-recon-and-sensitive-data-expos
 常见的open redirect位置
 /product/nextProduct?path=
 
+Reflected information
+当有看到reflected information的时候，可以考虑reflected xss or SSTI
+https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20Template%20Injection
+
 
