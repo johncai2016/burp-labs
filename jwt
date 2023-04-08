@@ -19,6 +19,19 @@ https://portswigger.net/web-security/jwt#brute-forcing-secret-keys-using-hashcat
 hashcat -a 0 -m 16500 <jwt> <wordlist>
 hashcat和wordlist已经安装到阿里云的/root目录下
 
-5. jku/kid
+5. jku attack
 https://www.yuque.com/john.cai/go6ppe/pa6zf4bg881fnpx6
 /root/github/jwt_tool
+
+Steps:
+1. put the content of '/root/.jwt_tool/jwttool_custom_jwks.json' to exploit server
+2. Send the request to repeater
+3. Update the sub to 'administrator' and the kid to 'jwt_tool' and sign with the RSA key.
+4. Copy the JWT and use the following command to generate a new JWT
+python3 jwt_tool.py <JWT> -X s -ju "https://exploit-0a5f002104fe2db28342c78d01a4008f.exploit-server.net/exploit"
+
+Note: The key point is to copy the (JWKS file used: /root/.jwt_tool/jwttool_custom_jwks.json) to the exploit server body.
+Remember the kid should be the same in header and the JWKS json file, "sub": "administrator" and then use this tool.
+
+6. kid attack
+
