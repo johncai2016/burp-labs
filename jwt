@@ -2,3 +2,17 @@
 1. 在proxy->history中自动highlight出来
 2. 发送请求到repeater后可以修改数据，然后立刻发送，查看response
 
+这里主要是要配置 Symmetric key和RSA key, 根据alg的值来决定用哪个key去sign
+HS256: Symmetric Key
+RS256: RSA
+https://portswigger.net/burp/documentation/desktop/testing-workflow/session-management/jwts
+
+JWT Editor集成了几种常见的攻击:
+1. none signing alg
+2. enbed jwk
+3. HMAC key confusion
+4. 暴力破解Key
+https://github.com/wallarm/jwt-secrets/blob/master/jwt.secrets.list
+https://portswigger.net/web-security/jwt#brute-forcing-secret-keys-using-hashcat
+hashcat -a 0 -m 16500 <jwt> <wordlist>
+hashcat和wordlist已经安装到阿里云的/root目录下
