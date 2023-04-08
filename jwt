@@ -1,1 +1,4 @@
+建议安装JWT Editor
+1. 在proxy->history中自动highlight出来
+2. 发送请求到repeater后可以修改数据，然后立刻发送，查看response
 
