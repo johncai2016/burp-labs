@@ -3,3 +3,5 @@
 注意：必须要有response这个插件才会工作，
 这里有个polyglot，意思就是把payload合成在image中，当然用upload scanner也是可以扫出来的，所以这个插件还是蛮强大的。
 https://portswigger.net/web-security/file-upload/lab-file-upload-remote-code-execution-via-polyglot-web-shell-upload
+
+注意：当爆出issue后，发现并不太好找到有问题的requst/response.这里可以考虑通过一些关键字，比如文件名字在logger去查找。
