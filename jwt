@@ -9,7 +9,9 @@ https://portswigger.net/burp/documentation/desktop/testing-workflow/session-mana
 
 JWT Editor集成了几种常见的攻击:
 1. none signing alg
-2. enbed jwk
+2. embed jwk
+如果你已经有相对应的key了，当你选择embed jwk时，它会弹出一个框让你选择对应的key.选择好后会自动把public key放进来。这个时候当你修改payload后，就可以用priviate key去sign.
+
 3. HMAC key confusion
 4. 暴力破解Key
 https://github.com/wallarm/jwt-secrets/blob/master/jwt.secrets.list
