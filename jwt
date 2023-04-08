@@ -34,4 +34,7 @@ Note: The key point is to copy the (JWKS file used: /root/.jwt_tool/jwttool_cust
 Remember the kid should be the same in header and the JWKS json file, "sub": "administrator" and then use this tool.
 
 6. kid attack
-
+In order to verify the signature, the server uses the kid parameter in JWT header to fetch the relevant key from its filesystem.
+然后利用/dev/null 的内容来作为签名校验。
+You could theoretically do this with any file, but one of the simplest methods is to use /dev/null, which is present on most Linux systems. As this is an empty file, fetching it returns null. 
+Therefore, signing the token with a Base64-encoded null byte(AA==) will result in a valid signature.
