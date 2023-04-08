@@ -18,3 +18,7 @@ https://github.com/wallarm/jwt-secrets/blob/master/jwt.secrets.list
 https://portswigger.net/web-security/jwt#brute-forcing-secret-keys-using-hashcat
 hashcat -a 0 -m 16500 <jwt> <wordlist>
 hashcat和wordlist已经安装到阿里云的/root目录下
+
+5. jku/kid
+https://www.yuque.com/john.cai/go6ppe/pa6zf4bg881fnpx6
+/root/github/jwt_tool
