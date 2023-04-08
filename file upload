@@ -1,3 +1,5 @@
-找到上传点后可以考虑用burp的upload scanner插件
+找到上传点后可以考虑用burp的upload scanner插件，大部分的burp labs都可以解决。
 关于这个插件一个比较重要的功能点是‘ReDownloader’，最重要的就是配置好要抓取的数据在response的位置，另外一个要点就是要确定可以下载的图片的完整路径。
-注意：必须要有response这个插件才会工作
+注意：必须要有response这个插件才会工作，
+这里有个polyglot，意思就是把payload合成在image中，当然用upload scanner也是可以扫出来的，所以这个插件还是蛮强大的。
+https://portswigger.net/web-security/file-upload/lab-file-upload-remote-code-execution-via-polyglot-web-shell-upload
