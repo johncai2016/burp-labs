@@ -15,6 +15,12 @@ On MySQL, the double-dash sequence must be followed by a space. Alternatively, t
 
 3.如果用它来执行命令
 4.sqlmap常用的方法
+  a. 基本使用方法: sqlmap -u url
+  b. 枚举数据库名称 --dbs
+  c. 枚举数据库表名 --tables     -D 可以指定某个数据库    --exclude-sysdbs
+  d. 枚举数据表中的列 --columns -D 可以指定某个数据库 -T 可以指定某个table
+  e. 枚举数据表中的数据  --dump   -C "a,b" 可以用C来指定要获取的列的数据，不同列之间用逗号分开
+  
 5.一些特殊的情况
 
 如何确定column number?
