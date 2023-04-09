@@ -1,8 +1,30 @@
 1.UNION的使用上要注意的问题
+ For a UNION query to work, two key requirements must be met:
+The individual queries must return the same number of columns.
+The data types in each column must be compatible between the individual queries.
+
+The UNION keyword lets you execute one or more additional SELECT queries and append the results to the original query
+ 
+ https://portswigger.net/web-security/sql-injection/union-attacks
+ 
 2.如何确定数据库类型，数据库名，数据表，列和获取具体内容
+On Oracle, every SELECT query must use the FROM keyword and specify a valid table. There is a built-in table on Oracle called dual which can be used for this purpose
+On MySQL, the double-dash sequence must be followed by a space. Alternatively, the hash character # can be used to identify a comment.
+以上两个特征可以被用来区分不同的数据库
+
+
 3.如果用它来执行命令
 4.sqlmap常用的方法
 5.一些特殊的情况
+
+如何确定column number?
+1. order by
+2. union
+
+
+https://portswigger.net/web-security/sql-injection/cheat-sheet
+https://portswigger.net/web-security/sql-injection
+
 
 
 
