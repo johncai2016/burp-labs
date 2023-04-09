@@ -12,7 +12,7 @@ blog-post-author-display=user.name}}{{7*7}}
 具体测试方法可疑参考：
 https://www.yuque.com/john.cai/go6ppe/wssgge
 
-推荐用自动化的工具:
+自动化的工具:（速度有点慢)
 https://github.com/vladko312/SSTImap
 几个要改进的地方:
 a.能否在burp里面自动生成命令，比如里面有-u -c -m -d 这些参数都要自己获取然后组装，如果可以写个插件一键获取，那要方便很多。
