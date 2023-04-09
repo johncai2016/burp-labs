@@ -20,7 +20,10 @@ https://github.com/httpvoid/writeups/blob/main/Ruby-deserialization-gadget-on-ra
 https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/TRACE
 7. /.git
 https://www.bugcrowd.com/resources/levelup/github-recon-and-sensitive-data-exposure-module/
-
+8.常用list
+https://portswigger.net/web-security/authentication/auth-lab-usernames
+https://portswigger.net/web-security/sql-injection/cheat-sheet
+https://portswigger.net/web-security/authentication/auth-lab-passwords
 
 常见的open redirect位置
 /product/nextProduct?path=
