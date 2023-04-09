@@ -1,4 +1,4 @@
-可以考虑安装‘host header inchecktion',它也是可以解决大部分的host header相关的lab. 在做active scan的时候会自动找到issue.
+可以考虑安装‘host header inchecktion',它虽然无法帮你自动确定问题，但是它能大概找到问题，可以给你提供一些思路.
 1. 任意host header,这个通常用来reset password attack
 2. duplicate host,这个通常用来达到cache poision或者ssfr
 3. Absolute URL，我们大部分请求的时候用的是相对路径，这种攻击的方法就是把相对路径换成绝对路径
