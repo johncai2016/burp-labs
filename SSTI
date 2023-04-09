@@ -1,6 +1,6 @@
 常见的可疑点：
 1. reflected request params to response， 比如view more details about the first product
-2. user.name 这种类似object reference的地方, 比如user profile
+2. user.name 这种类似object reference的地方, 比如user profile，但是要注意，注入的效果要在另外一个url才能查看到。
 3. 编辑content的地方，比如edit one of the product description templates
 
 
