@@ -1,1 +1,5 @@
-
+可以考虑安装‘host header inchecktion',它也是可以解决大部分的host header相关的lab.
+1. 任意host header,这个通常用来reset password attack
+2. duplicate host,这个通常用来达到cache poision或者ssfr
+3. Absolute URL，我们大部分请求的时候用的是相对路径，这种攻击的方法就是把相对路径换成绝对路径
+4. 正则部分匹配，这个通常是在host后面假如其它域名，这样的用意就是为了把原来的host作为攻击者的一个子域名看待。
