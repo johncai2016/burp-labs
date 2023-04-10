@@ -97,5 +97,6 @@ https://portswigger.net/web-security/file-upload/lab-file-upload-web-shell-uploa
 https://portswigger.net/web-security/file-upload/lab-file-upload-remote-code-execution-via-polyglot-web-shell-upload (图片马)
 当然这里要考虑的一个问题就是可能会有类似WAF的阻碍，所以可能要考虑用encode来bypass.
 
-下面我们来总结一下各个阶段大概率会涉及到的lab和知识点，以帮助我们顺利通过考试.
-
+下面我们来总结一下读取文件的方法，以防有些keyword被block了我们还有替代方案.
+cat /home/carlos/
+file_content (php)
