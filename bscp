@@ -124,7 +124,9 @@ https://portswigger.net/web-security/file-upload/lab-file-upload-remote-code-exe
 
 下面我们来总结一下读取文件的方法，以防有些keyword被block了我们还有替代方案.
 cat /home/carlos/
-file_content (php)
+<?php
+echo file_get_contents("test.txt");
+?> 
 
 
 别人的考试经验:
