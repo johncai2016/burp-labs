@@ -63,6 +63,10 @@ https://portswigger.net/web-security/authentication/auth-lab-passwords
 命令注入:
 https://portswigger.net/web-security/os-command-injection/lab-blind-out-of-band-data-exfiltration (命令注入)
 https://portswigger.net/web-security/os-command-injection/lab-blind-output-redirection (命令注入)
+SSRF:
+https://portswigger.net/web-security/ssrf/blind/lab-out-of-band-detection （这个要结合command injection 才能实现数据提取)
+要考虑这两个怎么打组合,
+https://portswigger.net/web-security/ssrf/lab-ssrf-with-blacklist-filter (有可能需要bypass blacklist)
 
 反系列化:
 https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-arbitrary-object-injection-in-php (反系列化, 
@@ -80,10 +84,11 @@ https://portswigger.net/web-security/xxe/blind/lab-xxe-with-out-of-band-exfiltra
 https://portswigger.net/web-security/xxe/blind/lab-xxe-with-data-retrieval-via-error-messages
 https://portswigger.net/web-security/xxe/lab-xinclude-attack
 
-SSRF:
-
 SSTI:
-
+https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-basic
+https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-basic-code-context
+https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-using-documentation
+https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-in-an-unknown-language-with-a-documented-exploit
 
 Upload:
 https://portswigger.net/web-security/file-upload/lab-file-upload-web-shell-upload-via-path-traversal
