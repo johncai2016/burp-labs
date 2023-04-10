@@ -75,7 +75,7 @@ https://portswigger.net/web-security/ssrf/blind/lab-out-of-band-detection （这
 https://portswigger.net/web-security/ssrf/lab-ssrf-with-blacklist-filter (有可能需要bypass blacklist)
 注意：一般是http://localhost:6566/path
 
-反系列化:
+反系列化: 难点在于反系列化数据是经过多次编码的，常见的就是url/base64/压缩, 重点就是掌握java/php
 https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-arbitrary-object-injection-in-php (反系列化, 
 这个其实是比较好出题的，因为它涉及到几个点，比如要找到php source code,要读懂source code,要能根据source code写出反系列化利用代码）
 https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-exploiting-java-deserialization-with-apache-commons
@@ -88,6 +88,10 @@ b. echo cookie_value | base64 -d > admin.pfs, 然后用file admin.pfs查看文�
    可以用这个方法来解压: mv admin.pfs admin.gz, 然后再gunzip admin.gz
    参考自:https://www.youtube.com/watch?v=yC0F05oggTE&list=PLsDxQTEdg_YkVMP6PybE7I-hAdhR7adem&index=43 (大概12分40秒的地方)
 c. 也可能需要经过多次decode.
+
+反系列化常见的magic number, 可以用cat/xxd来判断，比如cat可以看得熟悉的特征，如果cat不行，就可以考虑用xxd来以16进制形式查看数据.
+php: O:4:"User":2:{s:4:"name":s:6:"carlos"; s:10:"isLoggedIn":b:1;}
+java:use binary serialization formats，serialized Java objects always begin with the same bytes, which are encoded as ac ed in hexadecimal and rO0 in Base64.
 
 
 服务端原型污染:
