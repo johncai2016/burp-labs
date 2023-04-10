@@ -34,6 +34,9 @@ https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20
 一些思考：
 从别人的经验来看，有3个阶段，第一个阶段是获取普通用户的权限，这个人通常是carlos.要获取她的账号权限，通常有几个方法
 1. 通过xss(一般在search，可以通过DOM Invader）所以这里要收集一些如何获取cookie的js,也考察是否会使用exploit server
+如果document.cookie被禁用了，可以考虑docuemnt["cookie"]或者docuemnt['cookie'], 这个跟proto type pollution里面的做法是一样的。document是object,访问属性可以通过dot，也可以通过
+[]
+
 2. 通过请求走私
 https://portswigger.net/web-security/request-smuggling/exploiting/lab-capture-other-users-requests
 https://portswigger.net/web-security/request-smuggling/exploiting/lab-deliver-reflected-xss
@@ -65,6 +68,7 @@ SSRF:
 https://portswigger.net/web-security/ssrf/blind/lab-out-of-band-detection （这个要结合command injection 才能实现数据提取)
 要考虑这两个怎么打组合,
 https://portswigger.net/web-security/ssrf/lab-ssrf-with-blacklist-filter (有可能需要bypass blacklist)
+注意：一般是http://localhost:6566/path
 
 反系列化:
 https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-arbitrary-object-injection-in-php (反系列化, 
