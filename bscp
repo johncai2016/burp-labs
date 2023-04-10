@@ -21,9 +21,7 @@ https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/TRACE
 7. /.git
 https://www.bugcrowd.com/resources/levelup/github-recon-and-sensitive-data-exposure-module/
 8.常用list
-https://portswigger.net/web-security/authentication/auth-lab-usernames
 https://portswigger.net/web-security/sql-injection/cheat-sheet
-https://portswigger.net/web-security/authentication/auth-lab-passwords
 
 常见的open redirect位置
 /product/nextProduct?path=
@@ -36,13 +34,55 @@ https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20
 https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/main/README.md
 
 一些思考：
-从别人的经验来看，有3个阶段，第一个是获取普通用户的权限，这个人通常是carlos.要获取她的账号权限，通常是通过xss(一般在search，可以通过DOM Invader）
-或者一些登录bypass(比如暴力破解之类的).所以这里要收集一些如何获取cookie的js，包括一些bypass方法。这里可以把相关的lab放在一起，整理一下思路出来。
+从别人的经验来看，有3个阶段，第一个阶段是获取普通用户的权限，这个人通常是carlos.要获取她的账号权限，通常有几个方法
+1. 通过xss(一般在search，可以通过DOM Invader）所以这里要收集一些如何获取cookie的js
+2. 通过请求走私
+https://portswigger.net/web-security/request-smuggling/exploiting/lab-capture-other-users-requests
+https://portswigger.net/web-security/request-smuggling/exploiting/lab-deliver-reflected-xss
+https://portswigger.net/web-security/request-smuggling/advanced/response-queue-poisoning/lab-request-smuggling-h2-response-queue-poisoning-via-te-request-smuggling
+
+3. 通过缓存投毒home page
+
+4. 爆破用户名密码登录，这个通常是借助
+https://portswigger.net/web-security/authentication/auth-lab-usernames
+https://portswigger.net/web-security/authentication/auth-lab-passwords
+
 第二阶段就是获取管理员的权限，也就是要以管理员的身份登录或者获取到他的cookie,
 这个通常是通过sqli来获取。
+
 但是注意一点就是整个lab只有一个active session.也就是说第一阶段和第二阶段，一定会有个获取cookie的过程。如果获取的cookie属于carlos,那我们就可以推断第二阶段只能是想办法找到adminitrator的
 用户名和密码(或者是想办法bypass authentication,但个人感觉概率比较小).所以这个阶段要多想想有哪些方法可以获取到adminitrator的用户名和密码。
-第三阶段基本是要获取administrator下的一个flag.也就是要求我们要有系统的执行权限，那这个通常是xxe, 反系列化，ssrf，命令注入
+
+
+第三阶段基本是要获取administrator下的一个flag.也就是要求我们要有系统的执行权限，那这个通常是xxe, 反系列化，ssrf，命令注入, SSTI, upload webshell,server side prototype pollution
+命令注入:
+https://portswigger.net/web-security/os-command-injection/lab-blind-out-of-band-data-exfiltration (命令注入)
+https://portswigger.net/web-security/os-command-injection/lab-blind-output-redirection (命令注入)
+
+反系列化:
+https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-arbitrary-object-injection-in-php (反系列化, 
+这个其实是比较好出题的，因为它涉及到几个点，比如要找到php source code,要读懂source code,要能根据source code写出反系列化利用代码）
+https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-exploiting-java-deserialization-with-apache-commons
+(这个主要就是考察如何使用java ysoserial, 为什么这么推测呢？因为换个版本就需要用不同的payload才行，一个是考察你能否清楚java 反系列化的特征，一个是考察你是会用ysoserial)
+https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-exploiting-php-deserialization-with-a-pre-built-gadget-chain
+(这个主要是考察如何使用phpggc，这个比java ysoserail还要好出题，因为你如何去确定要用的是什么框架，这里就涉及到怎么去判断框架的问题)
+
+服务端原型污染:
+https://portswigger.net/web-security/prototype-pollution/server-side/lab-remote-code-execution-via-server-side-prototype-pollution
+
+XXE:
+
+SSRF:
+
+SSTI:
+
+
+Upload:
+https://portswigger.net/web-security/file-upload/lab-file-upload-web-shell-upload-via-path-traversal
+https://portswigger.net/web-security/file-upload/lab-file-upload-web-shell-upload-via-extension-blacklist-bypass
+https://portswigger.net/web-security/file-upload/lab-file-upload-web-shell-upload-via-obfuscated-file-extension
+https://portswigger.net/web-security/file-upload/lab-file-upload-remote-code-execution-via-polyglot-web-shell-upload (图片马)
+当然这里要考虑的一个问题就是可能会有类似WAF的阻碍，所以可能要考虑用encode来bypass.
 
 下面我们来总结一下各个阶段大概率会涉及到的lab和知识点，以帮助我们顺利通过考试.
 
