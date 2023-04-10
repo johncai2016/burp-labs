@@ -32,4 +32,14 @@ Reflected information
 当有看到reflected information的时候，可以考虑reflected xss or SSTI
 https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20Template%20Injection
 
+别人的考试经验:
+https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/main/README.md
 
+一些思考：
+从别人的经验来看，有3个阶段，第一个是获取普通用户的权限，这个人通常是carlos.要获取她的账号权限，通常是通过xss(一般在search，可以通过DOM Invader）
+或者一些登录bypass(比如暴力破解之类的).所以这里要收集一些如何获取cookie的js，包括一些bypass方法。这里可以把相关的lab放在一起，整理一下思路出来。
+第二阶段就是获取管理员的权限，也就是要以管理员的身份登录或者获取到他的cookie,
+这个通常是通过sqli来获取。
+但是注意一点就是整个lab只有一个active session.也就是说第一阶段和第二阶段，一定会有个获取cookie的过程。如果获取的cookie属于carlos,那我们就可以推断第二阶段只能是想办法找到adminitrator的
+用户名和密码(或者是想办法bypass authentication,但个人感觉概率比较小).所以这个阶段要多想想有哪些方法可以获取到adminitrator的用户名和密码。
+第三阶段基本是要获取administrator下的一个flag.也就是要求我们要有系统的执行权限，那这个通常是xxe, 反系列化，ssrf，命令注入
