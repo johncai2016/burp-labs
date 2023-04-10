@@ -123,7 +123,7 @@ https://portswigger.net/web-security/file-upload/lab-file-upload-remote-code-exe
 当然这里要考虑的一个问题就是可能会有类似WAF的阻碍，所以可能要考虑用encode来bypass.
 
 下面我们来总结一下读取文件的方法，以防有些keyword被block了我们还有替代方案.
-cat /home/carlos/
+cat /home/carlos/secret
 <?php
 echo file_get_contents("test.txt");
 ?> 
