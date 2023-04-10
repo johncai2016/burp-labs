@@ -76,6 +76,8 @@ https://portswigger.net/web-security/ssrf/blind/lab-out-of-band-detection （这
 要考虑这两个怎么打组合,
 https://portswigger.net/web-security/ssrf/lab-ssrf-with-blacklist-filter (有可能需要bypass blacklist)
 注意：一般是http://localhost:6566/path
+可以考虑用curl来外带数据到burp collaborator
+curl --data-urlencode 'comment=hello world' url
 
 反系列化: 难点在于反系列化数据是经过多次编码的，常见的就是url/base64/压缩, 重点就是掌握java/php
 https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-arbitrary-object-injection-in-php (反系列化, 
