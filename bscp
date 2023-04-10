@@ -63,7 +63,7 @@ https://portswigger.net/web-security/authentication/auth-lab-passwords
 
 但是注意一点就是整个lab只有一个active session.也就是说第一阶段和第二阶段，一定会有个获取cookie的过程。如果获取的cookie属于carlos,那我们就可以推断第二阶段只能是想办法找到adminitrator的
 用户名和密码(或者是想办法bypass authentication,但个人感觉概率比较小).所以这个阶段要多想想有哪些方法可以获取到adminitrator的用户名和密码。
-a. sql injection. 这个通常要借助sqlmap.
+a. sql injection. 这个通常要借助sqlmap. 可能有时候还要借助--tamper这个参数.
 
 第三阶段主要是要获取administrator下的一个flag.也就是要求我们要有系统的执行权限，与这个主题相关的lab大概有这些。
 命令注入:
@@ -82,6 +82,13 @@ https://portswigger.net/web-security/deserialization/exploiting/lab-deserializat
 (这个主要就是考察如何使用java ysoserial, 为什么这么推测呢？因为换个版本就需要用不同的payload才行，一个是考察你能否清楚java 反系列化的特征，一个是考察你是会用ysoserial)
 https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-exploiting-php-deserialization-with-a-pre-built-gadget-chain
 (这个主要是考察如何使用phpggc，这个比java ysoserail还要好出题，因为你如何去确定要用的是什么框架，这里就涉及到怎么去判断框架的问题)
+很大概率会从cookie去实现反系列化，但是这个cookie可能不会那么直接就可以看得出来。这个时候可以考虑用下面的方法做一些decode.
+a. echo cookie_value | base64 -d | xxd
+b. echo cookie_value | base64 -d > admin.pfs, 然后用file admin.pfs查看文件的类型，如果是压缩数据，还需要解压缩，比如file tmp.txt返回gzip compressed data.
+   可以用这个方法来解压: mv admin.pfs admin.gz, 然后再gunzip admin.gz
+   参考自:https://www.youtube.com/watch?v=yC0F05oggTE&list=PLsDxQTEdg_YkVMP6PybE7I-hAdhR7adem&index=43 (大概12分40秒的地方)
+c. 也可能需要经过多次decode.
+
 
 服务端原型污染:
 https://portswigger.net/web-security/prototype-pollution/server-side/lab-remote-code-execution-via-server-side-prototype-pollution
