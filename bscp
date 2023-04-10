@@ -35,7 +35,11 @@ https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20
 从别人的经验来看，有3个阶段，第一个阶段是获取普通用户的权限，这个人通常是carlos.要获取她的账号权限，通常有几个方法
 1. 通过xss(一般在search，可以通过DOM Invader）所以这里要收集一些如何获取cookie的js,也考察是否会使用exploit server
 如果document.cookie被禁用了，可以考虑docuemnt["cookie"]或者docuemnt['cookie'], 这个跟proto type pollution里面的做法是一样的。document是object,访问属性可以通过dot，也可以通过
-[]
+[]. 这里还有个要注意的地方，我们一般最好是用base64 encode数据，然后传输过来后再decode,这可以避免一些不必要的干扰.
+
+常见的通过exploit server deliver payload给victim的方法
+a.<iframe>
+b.<script>
 
 2. 通过请求走私
 https://portswigger.net/web-security/request-smuggling/exploiting/lab-capture-other-users-requests
