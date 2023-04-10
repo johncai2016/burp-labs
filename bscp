@@ -66,9 +66,10 @@ https://portswigger.net/web-security/authentication/auth-lab-passwords
 a. sql injection. 这个通常要借助sqlmap. 可能有时候还要借助--tamper这个参数.
 
 第三阶段主要是要获取administrator下的一个flag.也就是要求我们要有系统的执行权限，与这个主题相关的lab大概有这些。
-命令注入:
+命令注入:可能需要${IFS}/$IFS来bypass空格
 https://portswigger.net/web-security/os-command-injection/lab-blind-out-of-band-data-exfiltration (命令注入)
 https://portswigger.net/web-security/os-command-injection/lab-blind-output-redirection (命令注入)
+
 SSRF:
 https://portswigger.net/web-security/ssrf/blind/lab-out-of-band-detection （这个要结合command injection 才能实现数据提取)
 要考虑这两个怎么打组合,
@@ -88,10 +89,13 @@ b. echo cookie_value | base64 -d > admin.pfs, 然后用file admin.pfs查看文�
    可以用这个方法来解压: mv admin.pfs admin.gz, 然后再gunzip admin.gz
    参考自:https://www.youtube.com/watch?v=yC0F05oggTE&list=PLsDxQTEdg_YkVMP6PybE7I-hAdhR7adem&index=43 (大概12分40秒的地方)
 c. 也可能需要经过多次decode.
+这里推荐使用https://gchq.github.io/CyberChef/， 它可以比较快的帮你分析出来。
 
 反系列化常见的magic number, 可以用cat/xxd来判断，比如cat可以看得熟悉的特征，如果cat不行，就可以考虑用xxd来以16进制形式查看数据.
 php: O:4:"User":2:{s:4:"name":s:6:"carlos"; s:10:"isLoggedIn":b:1;}
 java:use binary serialization formats，serialized Java objects always begin with the same bytes, which are encoded as ac ed in hexadecimal and rO0 in Base64.
+
+如果是Java 反系列化问题，可以考虑用burp插件 java deseraiization scanner来生成。
 
 
 服务端原型污染:
@@ -123,3 +127,4 @@ file_content (php)
 别人的考试经验:
 https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/main/README.md
 https://www.youtube.com/watch?v=yC0F05oggTE&list=PLsDxQTEdg_YkVMP6PybE7I-hAdhR7adem&index=42
+https://www.youtube.com/watch?v=fNoX_9v6-aY
