@@ -43,3 +43,6 @@ https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/m
 但是注意一点就是整个lab只有一个active session.也就是说第一阶段和第二阶段，一定会有个获取cookie的过程。如果获取的cookie属于carlos,那我们就可以推断第二阶段只能是想办法找到adminitrator的
 用户名和密码(或者是想办法bypass authentication,但个人感觉概率比较小).所以这个阶段要多想想有哪些方法可以获取到adminitrator的用户名和密码。
 第三阶段基本是要获取administrator下的一个flag.也就是要求我们要有系统的执行权限，那这个通常是xxe, 反系列化，ssrf，命令注入
+
+下面我们来总结一下各个阶段大概率会涉及到的lab和知识点，以帮助我们顺利通过考试.
+
