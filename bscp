@@ -30,8 +30,6 @@ Reflected information
 当有看到reflected information的时候，可以考虑reflected xss or SSTI
 https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20Template%20Injection
 
-别人的考试经验:
-https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/main/README.md
 
 一些思考：
 从别人的经验来看，有3个阶段，第一个阶段是获取普通用户的权限，这个人通常是carlos.要获取她的账号权限，通常有几个方法
@@ -100,3 +98,8 @@ https://portswigger.net/web-security/file-upload/lab-file-upload-remote-code-exe
 下面我们来总结一下读取文件的方法，以防有些keyword被block了我们还有替代方案.
 cat /home/carlos/
 file_content (php)
+
+
+别人的考试经验:
+https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/main/README.md
+https://www.youtube.com/watch?v=yC0F05oggTE&list=PLsDxQTEdg_YkVMP6PybE7I-hAdhR7adem&index=42
