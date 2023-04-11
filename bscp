@@ -58,6 +58,8 @@ https://portswigger.net/web-security/cross-site-scripting/cheat-sheet
 https://portswigger.net/web-security/request-smuggling/exploiting/lab-capture-other-users-requests
 https://portswigger.net/web-security/request-smuggling/exploiting/lab-deliver-reflected-xss
 https://portswigger.net/web-security/request-smuggling/advanced/response-queue-poisoning/lab-request-smuggling-h2-response-queue-poisoning-via-te-request-smuggling
+基本思路是先用burp的http request smuggling找到可疑点，然后可疑考虑用这个工具来帮你生成攻击payload.
+https://github.com/dhmosfunk/simple-http-smuggler-generator
 
 3. 通过缓存投毒home page
 https://portswigger.net/web-security/web-cache-poisoning/exploiting-implementation-flaws/lab-web-cache-poisoning-unkeyed-query
@@ -146,3 +148,18 @@ https://bscpcheatsheet.gitbook.io/exam/(重点)
 https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/main/README.md
 https://www.youtube.com/watch?v=yC0F05oggTE&list=PLsDxQTEdg_YkVMP6PybE7I-hAdhR7adem&index=42
 https://www.youtube.com/watch?v=fNoX_9v6-aY
+
+我们可以来思考一下下面这段提示
+There is always an administrator account with the username "administrator", plus a lower-privileged account usually called "carlos". If you find a username enumeration vulnerability, you may be able to break into a low-privileged account using the following username list and password list.
+Each application has up to one active user, who will be logged in either as a user or an administrator. You can assume that they will visit the homepage of the site every 15 seconds, and click any links in any emails they receive from the application. You can use exploit server's "send to victim" functionality to target them with reflected vulnerabilities.
+If you find an SSRF vulnerability, you can use it to read files by accessing an internal-only service, running on localhost on port 6566.
+从提示我们可以大概推测Only one active user session. 这个信息会出现在第一或者第二阶段。也就是如果第一阶段已经用了，那第二阶段就不是这个。相反的，如果第一阶段没有用上，那第二阶段就要考虑一下了
+那我们再来思考一下，跟这个active user session有关的问题可能有什么呢?
+1.xss
+2.请求走私(根据提示，大概率是在home page,这样就可以缩小扫描范围了)
+3.缓存投毒(根据提示，大概率是在home page,这样就可以缩小扫描范围了)
+
+提示中提到会点击邮件中的任何链接,这个主要涉及
+host header password reset(因为提示说它会点击邮件中的任何链接, 而且这个低权限的用户大概率就是carlos)
+其实也可以对照着这个来思考的。
+https://micahvandeusen.com/burp-suite-certified-practitioner-exam-review/
