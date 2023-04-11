@@ -171,4 +171,5 @@ https://micahvandeusen.com/burp-suite-certified-practitioner-exam-review/
 
 labs中涉及提取的方法大概如下:
 1.通过sqli获取数据库信息（这里常见的一个问题是sqlmap如果加上一些参数可能会比较慢，要怎么办？还有就是可能会用到tamper)
-2.通过jwt（比如在第一阶段我们已经获取到低权限的用户cookie,如果cookie是jwt形式，那大概率就是要通过jwt漏洞来提权了)
+2.通过jwt（比如在第一阶段我们已经获取到低权限的用户cookie,如果cookie是jwt形式，那大概率就是要通过jwt漏洞来提权了,个人感觉概率不大，但是如果真遇上了，可能要结合信息泄露key来完成)
+3.通过php反系列化修改cookie中的admin = 1(感觉概率不大，毕竟考察点太过简单)
