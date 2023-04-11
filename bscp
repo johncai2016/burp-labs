@@ -60,8 +60,7 @@ XSS大概率是要bypass的
 https://portswigger.net/web-security/request-smuggling/exploiting/lab-capture-other-users-requests
 https://portswigger.net/web-security/request-smuggling/exploiting/lab-deliver-reflected-xss
 https://portswigger.net/web-security/request-smuggling/advanced/response-queue-poisoning/lab-request-smuggling-h2-response-queue-poisoning-via-te-request-smuggling
-基本思路是先用burp的http request smuggling找到可疑点，然后可疑考虑用这个工具来帮你生成攻击payload.
-https://github.com/dhmosfunk/simple-http-smuggler-generator
+基本思路是先用burp的http request smuggling找到可疑点
 
 3. 通过缓存投毒home page
 https://portswigger.net/web-security/web-cache-poisoning/exploiting-implementation-flaws/lab-web-cache-poisoning-unkeyed-query
