@@ -141,8 +141,8 @@ echo file_get_contents("test.txt");
 
 
 别人的考试经验:
-https://micahvandeusen.com/burp-suite-certified-practitioner-exam-review/ (重点看这个)
-https://bscpcheatsheet.gitbook.io/exam/
+https://micahvandeusen.com/burp-suite-certified-practitioner-exam-review/ (重点)
+https://bscpcheatsheet.gitbook.io/exam/(重点)
 https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/main/README.md
 https://www.youtube.com/watch?v=yC0F05oggTE&list=PLsDxQTEdg_YkVMP6PybE7I-hAdhR7adem&index=42
 https://www.youtube.com/watch?v=fNoX_9v6-aY
