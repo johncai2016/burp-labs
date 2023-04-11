@@ -22,6 +22,7 @@ https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/TRACE
 https://www.bugcrowd.com/resources/levelup/github-recon-and-sensitive-data-exposure-module/
 8.常用list
 https://portswigger.net/web-security/sql-injection/cheat-sheet
+9. gobuster/dir 目录扫描?
 
 常见的open redirect位置
 /product/nextProduct?path=
@@ -53,6 +54,7 @@ You can use the following to auto trigger the payload.
 拿到cookie后就可以在浏览器中替换它访问carlos账号了
 
 https://portswigger.net/web-security/cross-site-scripting/cheat-sheet
+XSS大概率是要bypass的
 
 2. 通过请求走私
 https://portswigger.net/web-security/request-smuggling/exploiting/lab-capture-other-users-requests
@@ -135,6 +137,9 @@ https://portswigger.net/web-security/file-upload/lab-file-upload-web-shell-uploa
 https://portswigger.net/web-security/file-upload/lab-file-upload-remote-code-execution-via-polyglot-web-shell-upload (图片马)
 当然这里要考虑的一个问题就是可能会有类似WAF的阻碍，所以可能要考虑用encode来bypass.
 
+sqli:
+如果去读取文件内容
+
 下面我们来总结一下读取文件的方法，以防有些keyword被block了我们还有替代方案.
 cat /home/carlos/secret
 <?php
@@ -163,3 +168,7 @@ If you find an SSRF vulnerability, you can use it to read files by accessing an 
 host header password reset(因为提示说它会点击邮件中的任何链接, 而且这个低权限的用户大概率就是carlos)
 其实也可以对照着这个来思考的。
 https://micahvandeusen.com/burp-suite-certified-practitioner-exam-review/
+
+labs中涉及提取的方法大概如下:
+1.通过sqli获取数据库信息（这里常见的一个问题是sqlmap如果加上一些参数可能会比较慢，要怎么办？还有就是可能会用到tamper)
+2.通过jwt（比如在第一阶段我们已经获取到低权限的用户cookie,如果cookie是jwt形式，那大概率就是要通过jwt漏洞来提权了)
