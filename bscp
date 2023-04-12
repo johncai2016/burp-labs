@@ -76,7 +76,7 @@ https://portswigger.net/web-security/authentication/other-mechanisms/lab-offline
 https://portswigger.net/web-security/authentication/auth-lab-usernames
 https://portswigger.net/web-security/authentication/auth-lab-passwords
 
-
+5. 缓存投毒:
 
 第二阶段就是获取管理员的权限，也就是要以管理员的身份登录或者获取到他的cookie,也就是隐式的去访问admin panel去删除用户这种应该可以少关注.
 这个通常是通过sqli来获取。
@@ -97,6 +97,11 @@ https://portswigger.net/web-security/cors/lab-breaking-https-attack
 CSRF:
 https://portswigger.net/web-security/csrf/bypassing-samesite-restrictions/lab-samesite-strict-bypass-via-client-side-redirect
 
+其它几个比较大概率的lab
+https://portswigger.net/web-security/oauth/openid/lab-oauth-ssrf-via-openid-dynamic-client-registration
+https://portswigger.net/web-security/sql-injection/blind/lab-out-of-band-data-exfiltration
+https://portswigger.net/web-security/sql-injection/lab-sql-injection-with-filter-bypass-via-xml-encoding
+
 
 第三阶段主要是要获取administrator下的一个flag.也就是要求我们要有系统的执行权限，与这个主题相关的lab大概有这些。
 命令注入:可能需要${IFS}/$IFS来bypass空格
@@ -110,10 +115,6 @@ https://portswigger.net/web-security/ssrf/lab-ssrf-with-blacklist-filter (有可
 注意：一般是http://localhost:6566/path
 可以考虑用curl来外带数据到burp collaborator
 curl --data-urlencode 'comment=hello world' url
-
-其它几个比较大概率的lab
-https://portswigger.net/web-security/oauth/openid/lab-oauth-ssrf-via-openid-dynamic-client-registration
-https://portswigger.net/web-security/sql-injection/blind/lab-out-of-band-data-exfiltration
 
 
 反系列化: 难点在于反系列化数据是经过多次编码的，常见的就是url/base64/压缩, 重点就是掌握java/php
