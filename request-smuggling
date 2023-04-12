@@ -21,4 +21,3 @@ Exploiting HTTP request smuggling to deliver reflected XSS
 2. 然后就是常规的请求走私的方法去走私这个请求就可以了。因为对于后端来说，它会收到两个请求，第一个response会返回给你发的请求。第二个response会缓存起来。所以当用户的请求到达时，这个换成的请求
 会被先拿到，这样就可以达到攻击的目的了。
 
-这里有个小问题就是当你在用http request smuggling的插件时，可能会遇到屏幕太小无法显示ok button，这时候可以用键盘的'enter'键代替就可以了。
