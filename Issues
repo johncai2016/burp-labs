@@ -7,7 +7,7 @@ https://portswigger.net/web-security/prototype-pollution/client-side/lab-prototy
 问题2: Inspector发送HTTP2没有返回response的问题
 当你用http request smuggling entension自动找到问题后，把request send到repeater打算重发请求的时候，发现没有response回来(已经选择allow http/2 ALPN override)
 https://portswigger.net/web-security/request-smuggling/advanced/lab-request-smuggling-h2-cl-request-smuggling
-解决方案:这个插件生成的request不知道为啥不行，可以到logger中去找到相关请求，然后再到repeater中就可以解决这个问题了。
+解决方案:这个插件生成的request不知道为啥不行，可以到logger中去找到相关请求，然后再到repeater中就可以解决这个问题了。现在发现也不行，还在问support team看看有没有别的解决方案.
 
 
 问题3：在做下面这个lab的时候遇到一个因为回车换行符的问题导致无法解决lab的问题
