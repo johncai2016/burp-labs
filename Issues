@@ -14,3 +14,6 @@ https://portswigger.net/web-security/request-smuggling/advanced/lab-request-smug
 https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-exploiting-php-deserialization-with-a-pre-built-gadget-chain
 这个问题主要是
 https://nickjanetakis.com/blog/beware-of-piping-echo-into-base64-on-the-command-line
+
+问题4：屏幕小导致看不到http request smuggling的ok button
+解决方案:可以用键盘的enter键代替
