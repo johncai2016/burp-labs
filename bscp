@@ -54,7 +54,8 @@ You can use the following to auto trigger the payload.
 拿到cookie后就可以在浏览器中替换它访问carlos账号了
 
 https://portswigger.net/web-security/cross-site-scripting/cheat-sheet
-XSS大概率是要bypass的
+XSS大概率是要bypass的，可以参考这个
+https://www.secjuice.com/bypass-xss-filters-using-javascript-global-variables/
 
 2. 通过请求走私
 https://portswigger.net/web-security/request-smuggling/exploiting/lab-capture-other-users-requests
