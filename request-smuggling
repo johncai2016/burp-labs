@@ -7,3 +7,18 @@ x=y
 d
 x=y
 0
+
+
+Exploiting HTTP request smuggling to capture other users' requests
+这个的基本思路是：
+1.针对主页来做http request smuggling,因为不管你对get/post，前后端的系统都是一样的，所以拿home page来检测
+2.要capture到另外一个用户的请求，关键是要有一个页面可以反应出这些信息，不然就无法查看了，所以这里关键是找到一个可以post data，然后数据可以显示在页面上的地方。但是这里有可能要调整参数的
+位置，因为用户的请求是被追加到你这个post请求，作为数据的一部分提交到系统的。假如你最后一个字段有长度限制或者其它校验，那就会导致数据提交不了，那你当然也就看不到用户的实际请求了。
+
+Exploiting HTTP request smuggling to deliver reflected XSS
+这个的基本思路是:
+1. 你要找到一个reflected xss的点，这通常可以借助active scanner来完成。
+2. 然后就是常规的请求走私的方法去走私这个请求就可以了。因为对于后端来说，它会收到两个请求，第一个response会返回给你发的请求。第二个response会缓存起来。所以当用户的请求到达时，这个换成的请求
+会被先拿到，这样就可以达到攻击的目的了。
+
+这里有个小问题就是当你在用http request smuggling的插件时，可能会遇到屏幕太小无法显示ok button，这时候可以用键盘的'enter'键代替就可以了。
