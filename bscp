@@ -78,7 +78,7 @@ https://portswigger.net/web-security/authentication/auth-lab-passwords
 
 
 
-第二阶段就是获取管理员的权限，也就是要以管理员的身份登录或者获取到他的cookie,
+第二阶段就是获取管理员的权限，也就是要以管理员的身份登录或者获取到他的cookie,也就是隐式的去访问admin panel去删除用户这种应该可以少关注.
 这个通常是通过sqli来获取。
 
 但是注意一点就是整个lab只有一个active session.也就是说第一阶段和第二阶段，一定会有个获取cookie的过程。如果获取的cookie属于carlos,那我们就可以推断第二阶段只能是想办法找到adminitrator的
