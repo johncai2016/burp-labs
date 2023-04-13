@@ -35,3 +35,6 @@ XSS + CSRF
 
 XSS + CORS
 https://portswigger.net/web-security/cors/lab-breaking-https-attack
+
+常见不同上下文中可以考虑使用的payload.
+
