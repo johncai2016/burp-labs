@@ -55,3 +55,6 @@ https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-dom-xss-
 通过DOM Invader是可以找到前面这个sink点的，而且给出了var searchResultsObj = {"results":[],"searchTerm":"aydkrl4k1'\"<>"}
 我们可以发现可控数据是在json数据中，所以这个时候想到的就是要逃逸"，然后注入类似:"-alert(1)}//的数据.
 
+注意在这里经常用到:-alert(1)
+
+例子8:
