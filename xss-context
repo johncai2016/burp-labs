@@ -39,22 +39,29 @@ Solution中用的是的是这样的方案也是可以弹窗的.可以在https://
 <script>
 var searchTerms = ''-alert(1)-'';
 </script>
+注意在这里经常用到:字符串+-alert()+-字符串仍旧会执行alert,比如+aler(1);-alert(1);-alert(1)-;+alert(1)+;
+注意要用注释来避免语法错误。
 
 例子5:用户可控数据在tag中的，一般我们会直接用上<img%20src=1%20onerror=alert(1)>
 但是因为数据被放置在select option里面,所以这里面可以考虑先闭合掉</select>即可触发漏洞了。
 https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-document-write-sink-inside-select-element
 
-例子6:在AngularJS中(未来可以考虑如何做到插件里面作为一个passive scan点)
-https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-angularjs-expression
-这里的关键是如何自动识别到AngularJS，主要就是看HTML nodes containing the ng-app attribute,比如<body ng-app>
-https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/XSS%20Injection/XSS%20in%20Angular.md
-
-例子7:可控数据在json中
+例子6:可控数据在json中
 https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-dom-xss-reflected
  eval('var searchResultsObj = ' + this.responseText);
 通过DOM Invader是可以找到前面这个sink点的，而且给出了var searchResultsObj = {"results":[],"searchTerm":"aydkrl4k1'\"<>"}
 我们可以发现可控数据是在json数据中，所以这个时候想到的就是要逃逸"，然后注入类似:"-alert(1)}//的数据.
 
-注意在这里经常用到:-alert(1)
 
-例子8:
+例子7:在模板中使用
+${alert(1)}
+angular特定模板(未来可以考虑如何做到插件里面作为一个passive scan点)
+https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-angularjs-expression
+这里的关键是如何自动识别到AngularJS，主要就是看HTML nodes containing the ng-app attribute,比如<body ng-app>
+https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/XSS%20Injection/XSS%20in%20Angular.md
+
+例子8:利用atrributename替代href
+<animate attributeName="href" values="javascript:alert(1)"></animate>
+https://xz.aliyun.com/t/12357  这个里面有更加详细的讲解
+
+
