@@ -37,6 +37,38 @@ b. -p 'sort-by' -batch --flush-session --dbms postgresql --technique E --level 5
 https://portswigger.net/web-security/sql-injection/cheat-sheet
 https://portswigger.net/web-security/sql-injection
 
+各种绕过:
+绕过空格: %20 %09 %0a %0b %0c %0d %a0 %00 /**/ /!/ + ()
 
+绕过引号: 
+1）、16进制
+2）、ASCII编码
+3）、url编码（后台要url解码）
 
+绕过逗号:
+1、在使用盲注的时候，会使用到 substr 、substring() 、mid() 、limit 等函数。这些函数都需要用到逗号。
+如果只是过滤了逗号，则对于substr、substring() 和 mid() 这两个函数可以使用from for的方式来绕过。
+对于limit ，可以用 offset 绕过。substr、substring、mid三个函数的功能用法均一致。
+
+绕过比较符<>:
+在使用盲注的时候，会用到二分法来比较操作符来进行操作。如果过滤了比较操作符，那么就需要使用到 greatest()和lease（）来进行绕过。
+greatest()返回最大值，least()返回最小值。
+greatest(n1,n2,n3.....)返回输入参数的最大值；
+least(n1,n2,n3....)返回输入参数的最小值
+
+绕过 or and xor not:
+and用 && 代替，也可以使用 ^ 代替 ；or用 || 代替 ； xor用 | 代替 ； not用 ! 代替 
+
+绕过注释符:
+如果过滤了#，则可以利用 ||' 来绕过。但是这个只限于闭合后面是单引号这种情形！
+
+绕过等于号:
+使用 like、rlike、regexp
+like：就是等于的意思
+rlike：就是里面含有这个
+regexp：和rlike一样，里面含有即可
+
+绕过union，select，where等:
+
+https://xz.aliyun.com/t/12149
 
