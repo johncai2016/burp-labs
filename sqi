@@ -29,6 +29,9 @@ https://forum.portswigger.net/thread/stage-2-of-practice-exam-with-sqlmap-1-7-2-
 a.可以用copy as curl命令把cookie和post data等一次copy出来
 b. -p 'sort-by' -batch --flush-session --dbms postgresql --technique E --level 5 (可能会加上这几个参数)
 
+ --data=DATA         Data string to be sent through POST (e.g. "id=1")
+    --cookie=COOKIE     HTTP Cookie header value (e.g. "PHPSESSID=a8d127e..")
+
 如何确定column number?
 1. order by
 2. union
