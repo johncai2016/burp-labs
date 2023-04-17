@@ -9,4 +9,15 @@ PHP:
 
 
 Java:
+1. 我们可以借助Java Deserialization Scanner和active scanner来辅助我们找到有反系列化的注入点。
+2. 借助CyberChef来分析出payload的编码规则，比如payload会先base64 encode再url encode
+https://gchq.github.io/CyberChef/
+3. 借助GadgetProbe来找到具体支持的classes (具体用法可以参考https://github.com/BishopFox/GadgetProbe)
+4. 借助ysoserial.jar来生成具体的利用payload
+一般可以先用java -jar ysoerial.jar list来查看它支持的列表，找到一个跟上面一步相同的class
+运行类似这样的命令:
+java -jar ysoserial.jar CommonsCollections4 'nslookup burp's collaborator' | base64 -w0
+一般最好是用base64编码, -w0是为了去掉换行符
+
+
 Ruby:
