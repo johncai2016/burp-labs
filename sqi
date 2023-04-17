@@ -36,6 +36,19 @@ b. -p 'sort-by' -batch --flush-session --dbms postgresql --technique E --level 5
 1. order by
 2. union
 
+由于sqlmap通常速度会比较慢，这个时候可以考虑用burp active scanner只扫描sqli类型，一般来说还是可以找到某个参数有问题的。比如下面这个信息告诉我们两个很重要的信息。
+1. sort-by 有问题
+2. database是postgresql
+The sort-by parameter appears to be vulnerable to SQL injection attacks. The payload ' was submitted in the sort-by parameter, 
+and a database error message was returned. You should review the contents of the error message, and the application's handling of other input, 
+to confirm whether a vulnerability is present.  The database appears to be PostgreSQL.  
+那我们就可以根据这两个信息来做两方面的优化:
+1.--dbms postgresql
+2.把sort-by放在最前面，比如原始的是这样的
+/filtered_search?SearchTerm=a&sort-by=DATE&writer=
+改一下参数顺序：
+/filtered_search?sort-by=DATE&writer=&SearchTerm=a
+有时候甚至可以考虑把不相干的参数拿掉
 
 https://portswigger.net/web-security/sql-injection/cheat-sheet
 https://portswigger.net/web-security/sql-injection
