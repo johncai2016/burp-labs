@@ -13,7 +13,7 @@ By default, XInclude will try to parse the included document as XML. Since /etc/
 这个专题主要是要多看看外部DTD相关的XXE，包括下面这个结合file upload的
 https://portswigger.net/web-security/xxe/lab-xxe-via-file-upload
 
-当要读取的内容包含有<>&这些特殊字符时:
+当要读取的内容包含有特殊字符（默认有“<”、“>”、“&”、“'”和“"”）这些特殊字符时:
 当被读取文件中含有特殊符号时，不但没有预期想要的结果，还返回了一堆错误，这个时候就需要使用CDATA了，下面是引用WIKI中关于CDATA的介绍。
 CDATA，意为character data，是标记语言SGML与XML，表示文档的特定部分是普通的字符数据，而不是非字符数据或有特定、限定结构的字符数据。在XML文档或外部实体中，一个CDATA section是一段按字面解释的内容，不作为标记文本。字符用CDATA节表示或者按照标准语法表示，并无差异。例如"<" 与 "&" 分别表示 "<
 其实简单一点的来说也就是说，将脚本代码定义为 "CDATA" 后，CDATA 部分中的内容就会被解析器忽略，这个时候就可以读取文件了
@@ -41,4 +41,9 @@ evil.dtd
 
 另外就是可以考虑用工具XXEinjector，如果是使用工具，有几个需要注意的地方。
 1. --host 反向连接地址，可以是本地地址也可以是public server,主要目的是提供dtd文件和接收数据（比如外带数据)
-2. 
+ --file=metlnfo_req.txt 保存请求的文件
+--path=C:/flag.txt 要读取的目标文件
+--verbose 
+--httpport=999 反向连接的端口号，不加这个参数默认是80.
+--oob=http 
+--phpfilter（用上面的php伪协议来处理)
