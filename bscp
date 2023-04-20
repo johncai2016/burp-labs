@@ -114,6 +114,13 @@ https://portswigger.net/web-security/web-cache-poisoning/exploiting-implementati
 注意:cache buster的主要作用一般是为了避免对别人的影响和被别人影响，因为通常你会给一个随机值，而这个值别人是不知道的，这样就可以更好的证明问题，同时也不会去影响到别人，因为别人的请求
 不一定有这个值，就算有这个值也不会跟你的相同。
 
+一般情况下用Param Miner是可以发现的，如果有时候实在跑不出来，也可以根据插件的功能来手动试试，比如Get参数,cookie参数,header
+其实我们也可以这么想，因为param miner里面有集成了normalised param和normalised path,而且这两个的扫描也比较快，在你不确定是什么类型的cache poison的时候可以优先考虑。
+拿lab-web-cache-poisoning-normalization来说，通过param miner可以发现会报issue: URL-decoded path. 所以我们可以考虑两种情况下response的值是怎样的。比如先给原始数据<script>，发现会被反应
+到response里面，发送两次后发现X-Cache: hit,说明数据被缓存起来了。这时候把payload <script>变成url encode %3cscript%3e,发现还是返回缓存的<script>，所以这时候攻击思路就出来了。
+先通过burp去发送原始payload并确认已经被缓存，接着在browser上去执行相同的payload，当然browser是会自动做url encode。但是因为存在URL decode问题，所以也就导致在browser上的payload触发了
+缓存的payload.
+
 4. 登录认证bypass
 https://portswigger.net/web-security/authentication/other-mechanisms/lab-brute-forcing-a-stay-logged-in-cookie
 https://portswigger.net/web-security/authentication/other-mechanisms/lab-offline-password-cracking （重点看，因为可以改成多种encode，而且还要借助exploit server)
