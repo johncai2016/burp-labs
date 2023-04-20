@@ -110,6 +110,10 @@ https://portswigger.net/web-security/web-cache-poisoning/exploiting-implementati
 https://portswigger.net/web-security/web-cache-poisoning/exploiting-implementation-flaws/lab-web-cache-poisoning-fat-get
 https://portswigger.net/web-security/web-cache-poisoning/exploiting-implementation-flaws/lab-web-cache-poisoning-normalization
 
+在做缓存投毒的时候，通常可以考虑加上Pragma: x-get-cache-key这个header,这样在response中就会把cache key显示出来，比如lab-web-cache-poisoning-unkeyed-query
+注意:cache buster的主要作用一般是为了避免对别人的影响和被别人影响，因为通常你会给一个随机值，而这个值别人是不知道的，这样就可以更好的证明问题，同时也不会去影响到别人，因为别人的请求
+不一定有这个值，就算有这个值也不会跟你的相同。
+
 4. 登录认证bypass
 https://portswigger.net/web-security/authentication/other-mechanisms/lab-brute-forcing-a-stay-logged-in-cookie
 https://portswigger.net/web-security/authentication/other-mechanisms/lab-offline-password-cracking （重点看，因为可以改成多种encode，而且还要借助exploit server)
