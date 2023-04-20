@@ -79,3 +79,6 @@ javascript:alert(document.cookie)
 2. Burp pro active scanner.
 
 https://xz.aliyun.com/t/12357
+
+有一个小知识点就是exploit server默认的content-type is application/javascript是无法执行javascript的， 所以要把它改成text/html;
+Content-Type: application/javascript; charset=utf-8
