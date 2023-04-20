@@ -82,3 +82,8 @@ https://xz.aliyun.com/t/12357
 
 有一个小知识点就是exploit server默认的content-type is application/javascript是无法执行javascript的， 所以要把它改成text/html;
 Content-Type: application/javascript; charset=utf-8
+
+另外一个小知识点就是当我们用类似这样的方法来引入js文件的时候
+<script type='text/javascript' src='abc.js'></script>
+a. 当<script>中带有src属性的时候,<script src='xxx.js'>alert(1)</script>, 这个时候alert(1)是不会被执行的。对比一下<script>alert(1)</script>这种是会弹窗的。区别就在于有没有src属性.
+b. abc.js中不用再携带<script></script>tag了。
