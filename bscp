@@ -232,6 +232,7 @@ If you find an SSRF vulnerability, you can use it to read files by accessing an 
 3.缓存投毒(根据提示，大概率是在home page,这样就可以缩小扫描范围了)
 因为提示说有个active session会一直访问主页，所以也就意味着如果有缓存投毒问题，应该就是在主页了。而http request smuggling跟具体页面没有关系，而是中间件和后端的关系，所以也是可以直接
 对主页进行扫描的。用这个方法可以比较快的看看是不是需要考虑这两个方面。
+因为主页一般没有提交内容的地方，所以如果是请求走私和缓存投毒，大概率会和reflected xss结合一起，所以重点可以看看缓存中关于reflected xss的labs.
 
 提示中提到会点击邮件中的任何链接,这个主要涉及
 host header password reset(因为提示说它会点击邮件中的任何链接, 而且这个低权限的用户大概率就是carlos)
