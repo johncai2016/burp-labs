@@ -1,1 +1,41 @@
+缓存投毒的利用方式：
+1.Using web cache poisoning to deliver an XSS attack
+大部分情况是结合reflected xss,一般通过header,get parameters,cookie
+2. Using web cache poisoning to exploit unsafe handling of resource imports
+这里的resource是指js和css. 所以关键在于看能不能控制resource的来源.
+3. Enabling exploitation of 'unexploitable' vulnerabilities that rely on malformed requests that browsers won't send.
+这个的意思就是有些情况下用浏览器是无法真正攻击的，比如有些payload会被browser urlencode.那这样是无法达到工具效果的。但是我们却可以利用缓存投毒来达到攻击的效果。一个例子就是
+https://portswigger.net/web-security/web-cache-poisoning/exploiting-implementation-flaws/lab-web-cache-poisoning-normalization
+在这个例子里，如果我们通过浏览器来发送这个payload，我们会发现payload会被浏览器自动urlencode，这样我们的xss就无法触发了。但是我们却可以换个方式来攻击，就是先用burp把xss payload发送到
+服务器，让服务器把xss payload缓存起来。接着利用了normalization bug，让浏览器发送的urlencode payload也能触发xss payload.要更加容易理解这个问题，你可以自己试试这个例子中的payload.
+GET /random</p><script>alert(1)</script><p>foo, 这里面会涉及到两种情况。
+1. 如果通过browser先发送这段payload两次，让它先缓存起来,我们会发现返回Not Found: /random%3C/p%3E%3Cscript%3Ealert(1)%3C/script%3E%3Cp%3Efoo，也就是无法触发xss.
+这个时候即使你通过burp去发送这段payload，你也会得到相同的结果，
+2. 但是如果我们先通过burp去发送GET /random</p><script>alert(1)</script><p>foo两次呢？这个时候我们会发现缓存起来的就是xss payload了
+<p>Not Found: /random</p><script>alert(1)</script><p>foo</p>
+这个时候我们再通过浏览器去发送/random%3C/p%3E%3Cscript%3Ealert(1)%3C/script%3E%3Cp%3Efoo， 它也能触发payload.
+这就是一个典型的没有缓存投毒是无法达到xss的，但是现在通过缓存投毒就可以很容易实现了。
+
+特殊的案例:
+Using multiple headers to exploit web cache poisoning vulnerabilities, 这种就是刚好要找到多个可控制的地方才能形成真正的攻击.
+参考来源:
+https://portswigger.net/web-security/web-cache-poisoning/exploiting-design-flaws
+
+如何借助Request/Response头来辅助构造攻击payload?
+1. 在做缓存投毒的时候，通常可以考虑加上Pragma: x-get-cache-key这个header,这样在response中就会把cache key显示出来，比如lab-web-cache-poisoning-unkeyed-query
+2. Cache-control directives, 通过这个来判断下一次投毒的时间点
+when responses contain information about how often the cache is purged or how old the currently cached response is:
+Age: 174
+Cache-Control: public, max-age=1800
+It does save a potential attacker some of the manual effort involved because they know exactly when to send their payload to ensure it gets cached.
+3. Vary header
+The Vary header specifies a list of additional headers that should be treated as part of the cache key even if they are normally unkeyed. It is commonly used to specify that the User-Agent header is keyed, 
+for example, so that if the mobile version of a website is cached, this won't be served to non-mobile users by mistake
+
+
+
+
+注意:cache buster的主要作用一般是为了避免对别人的影响和被别人影响，因为通常你会给一个随机值，而这个值别人是不知道的，这样就可以更好的证明问题，同时也不会去影响到别人，因为别人的请求
+不一定有这个值，就算有这个值也不会跟你的相同。
+
 
