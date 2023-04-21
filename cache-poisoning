@@ -55,6 +55,8 @@ const setCountryCookie = (country) => { document.cookie = 'country=' + country; 
 const setLangCookie = (lang) => { document.cookie = 'lang=' + lang; };
 akzldka({"country":"United Kingdom"});
 
+In practice, when a website attempts to exclude a specific parameter from the cache key, we can often exploit URL parsing quirks to trick it into partially excluding 
+arbitrary parameters from the key. We'll refer to this technique as cache parameter cloaking.
 
 如何借助Request/Response头来辅助构造攻击payload?
 1. 在做缓存投毒的时候，通常可以考虑加上Pragma: x-get-cache-key这个header,这样在response中就会把cache key显示出来，比如lab-web-cache-poisoning-unkeyed-query
