@@ -12,12 +12,19 @@ https://portswigger.net/web-security/web-cache-poisoning/exploiting-implementati
 在这个例子里，如果我们通过浏览器来发送这个payload，我们会发现payload会被浏览器自动urlencode，这样我们的xss就无法触发了。但是我们却可以换个方式来攻击，就是先用burp把xss payload发送到
 服务器，让服务器把xss payload缓存起来。接着利用了normalization bug，让浏览器发送的urlencode payload也能触发xss payload.要更加容易理解这个问题，你可以自己试试这个例子中的payload.
 GET /random</p><script>alert(1)</script><p>foo, 这里面会涉及到两种情况。
-1. 如果通过browser先发送这段payload两次，让它先缓存起来,我们会发现返回Not Found: /random%3C/p%3E%3Cscript%3Ealert(1)%3C/script%3E%3Cp%3Efoo，也就是无法触发xss.
+3.1. 如果通过browser先发送这段payload两次，让它先缓存起来,我们会发现返回Not Found: /random%3C/p%3E%3Cscript%3Ealert(1)%3C/script%3E%3Cp%3Efoo，也就是无法触发xss.
 这个时候即使你通过burp去发送这段payload，你也会得到相同的结果，
-2. 但是如果我们先通过burp去发送GET /random</p><script>alert(1)</script><p>foo两次呢？这个时候我们会发现缓存起来的就是xss payload了
+3.2. 但是如果我们先通过burp去发送GET /random</p><script>alert(1)</script><p>foo两次呢？这个时候我们会发现缓存起来的就是xss payload了
 <p>Not Found: /random</p><script>alert(1)</script><p>foo</p>
 这个时候我们再通过浏览器去发送/random%3C/p%3E%3Cscript%3Ealert(1)%3C/script%3E%3Cp%3Efoo， 它也能触发payload.
 这就是一个典型的没有缓存投毒是无法达到xss的，但是现在通过缓存投毒就可以很容易实现了。
+
+4.投毒css,js文件
+Resource files like JS and CSS are mostly static, but some reflect input from the query string. 
+This is typically harmless as browsers won't execute such files when they're viewed directly, but it makes for fantastic cache poisoning gadgets. 
+If we can use cache poisoning to inject content into a resource file, we get control over every page that imports that resource, 
+even if it's cross-domain. For example, on one target,an 'import' rule reflected the current query string, presumably as a fancy versioning feature:
+https://portswigger.net/research/web-cache-entanglement
 
 特殊的案例:
 Using multiple headers to exploit web cache poisoning vulnerabilities, 这种就是刚好要找到多个可控制的地方才能形成真正的攻击.
@@ -32,7 +39,21 @@ This is bad news for websites that use Varnish without the builtin.vcl snippet i
 利用条件有两个：
 1. GET中允许携带body数据
 2. cache server没有把body remove掉，而是被当成unkey数据被缓存起来了。
+常见的利用方式就是body中的值覆盖了原本的值，那么思路就是利用相同的参数来看看能不能覆盖掉原来的值。
+https://portswigger.net/web-security/web-cache-poisoning/exploiting-implementation-flaws/lab-web-cache-poisoning-fat-get
 
+常见的有可能的点就是GET里携带了一些参数，比如上面这个lab和research中的github的例子。
+https://portswigger.net/research/web-cache-entanglement
+
+Cache Parameter Cloaking:
+这个攻击的特点是部分参数是有意被排除在cache_key外，但是值又会被缓存的，最后利用解析上的错误来达到攻击的效果。
+具体就是在GET参数中携带unkey,然后估计是各种特殊符号去尝试，
+比如/js/geolocate.js?callback=setCountryCookie&utm_content=x;callback=akzldka&nmshm5h1=1
+在这个例子中，我们知道，utm_content的值其实是"x;callback=akzldka',因为GET中是根据&符号来分解参数的。问题就出在当把这个值缓存起来的时候，它应该是根据';'来分割，
+最后又因为代码上会处理两个callback参数，而且当有参数污染的时候，程序读取的是第二个callback的值，所以就把第二个callback的值缓存起来。 得到下面这个值。
+const setCountryCookie = (country) => { document.cookie = 'country=' + country; };
+const setLangCookie = (lang) => { document.cookie = 'lang=' + lang; };
+akzldka({"country":"United Kingdom"});
 
 
 如何借助Request/Response头来辅助构造攻击payload?
@@ -50,6 +71,8 @@ for example, so that if the mobile version of a website is cached, this won't be
 注意:cache buster的主要作用一般是为了避免对别人的影响和被别人影响，因为通常你会给一个随机值，而这个值别人是不知道的，这样就可以更好的证明问题，同时也不会去影响到别人，因为别人的请求
 不一定有这个值，就算有这个值也不会跟你的相同。
 
+检查工具:
+Param Miner可以发现大部分的类型。
 
 
 
