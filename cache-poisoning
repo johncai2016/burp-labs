@@ -1,3 +1,6 @@
+缓存投毒的利用步骤:
+1.找到unkey的参数，比如request的数据(GET，header, cookie)反映在response中的上下文，然后根据上下文来构造利用payload.
+
 缓存投毒的利用方式：
 1.Using web cache poisoning to deliver an XSS attack
 大部分情况是结合reflected xss,一般通过header,get parameters,cookie
@@ -21,6 +24,17 @@ Using multiple headers to exploit web cache poisoning vulnerabilities, 这种就
 参考来源:
 https://portswigger.net/web-security/web-cache-poisoning/exploiting-design-flaws
 
+fat GET:
+这个问题产生的原因如下：
+Whenever a request has a body, it will get sent to the backend for a cache miss…
+…the builtin.vcl removes the body for GET requests because it is questionable if GET with a body is valid anyway (but some applications use it)
+This is bad news for websites that use Varnish without the builtin.vcl snippet in conjunction with a framework that supports GET requests with bodies (hereafter referred to as 'fat GET requests').
+利用条件有两个：
+1. GET中允许携带body数据
+2. cache server没有把body remove掉，而是被当成unkey数据被缓存起来了。
+
+
+
 如何借助Request/Response头来辅助构造攻击payload?
 1. 在做缓存投毒的时候，通常可以考虑加上Pragma: x-get-cache-key这个header,这样在response中就会把cache key显示出来，比如lab-web-cache-poisoning-unkeyed-query
 2. Cache-control directives, 通过这个来判断下一次投毒的时间点
@@ -33,9 +47,10 @@ The Vary header specifies a list of additional headers that should be treated as
 for example, so that if the mobile version of a website is cached, this won't be served to non-mobile users by mistake
 
 
-
-
 注意:cache buster的主要作用一般是为了避免对别人的影响和被别人影响，因为通常你会给一个随机值，而这个值别人是不知道的，这样就可以更好的证明问题，同时也不会去影响到别人，因为别人的请求
 不一定有这个值，就算有这个值也不会跟你的相同。
+
+
+
 
 
