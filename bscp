@@ -232,7 +232,7 @@ https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/m
 https://www.youtube.com/watch?v=yC0F05oggTE&list=PLsDxQTEdg_YkVMP6PybE7I-hAdhR7adem&index=42
 https://www.youtube.com/watch?v=fNoX_9v6-aY
 
-为了方便查找，可以考虑把所有solution集中起来方便查询.如果可以做成一个方便查询的功能就更加好了。
+为了方便查找，可以考虑把所有solution集中起来方便查询.如果可以做成一个方便查询的功能就更加好了。归纳总结常见的cheatsheet
 
 我们可以来思考一下下面这段提示
 There is always an administrator account with the username "administrator", plus a lower-privileged account usually called "carlos". If you find a username enumeration vulnerability, you may be able to break into a low-privileged account using the following username list and password list.
