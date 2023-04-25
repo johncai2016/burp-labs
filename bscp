@@ -24,6 +24,9 @@ https://www.bugcrowd.com/resources/levelup/github-recon-and-sensitive-data-expos
 https://portswigger.net/web-security/sql-injection/cheat-sheet
 9. gobuster/dir 目录扫描?
 
+在扫描一个网站时，经常碰到的其实是登录功能，nikto 默认没有设置登录的用户名和密码的参数，但在配置文件中可以配置其 cookie，
+这样在扫描一个网站，需要身份验证时，cookie 可用，则相当于是登录的状态。配置文件在 / etc/nikto.conf 下，找到 STATIC-COOKIE，设置即可
+
 常见的open redirect位置
 /product/nextProduct?path=
 
