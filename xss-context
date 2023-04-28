@@ -24,9 +24,10 @@ https://portswigger.net/web-security/cross-site-scripting/contexts/lab-attribute
 上下文是在属性中，所以逃逸引号就可以了
 "onmouseover="alert(1)
 
-例子3:用户可直接控制href的值
+例子3:用户可直接控制href/src的值
 https://portswigger.net/web-security/cross-site-scripting/contexts/lab-href-attribute-double-quotes-html-encoded
 javascript:alert(document.cookie)
+https://brutelogic.com.br/blog/xss-without-event-handlers/
 
 例子4:用户可控制的值inside a JavaScript string，比如这里是 var searchTerms = '用户可以控制的值'
 https://portswigger.net/web-security/cross-site-scripting/contexts/lab-javascript-string-angle-brackets-html-encoded
